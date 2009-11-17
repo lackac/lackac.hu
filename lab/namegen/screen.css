@@ -1,0 +1,80 @@
+body {
+  background-color: #fff;
+  color: #222;
+  font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+
+#container {
+  position: relative;
+}
+
+ul#flagged {
+  float: right;
+  width: 25%;
+}
+
+ul#flagged li {
+  margin: 0.25em 0.5em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+ul#words {
+  margin-right: 25%;
+  padding: 1em;
+}
+
+#controls {
+  margin-right: 25%;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 11px;
+  height: 80px;
+}
+
+#controls p {
+  margin-top: 11px;
+}
+
+input.num-field {
+  width: 3em;
+}
+
+#paypal {
+  float: right;
+  margin: 27px 5px;
+  text-align: center;
+}
+
+#digg {
+  float: right;
+  text-align: center;
+}
+
+ul#words {
+  border-right: 1px solid #ccc;
+}
+ul#words li {
+  float: left;
+  width: 5em;
+  margin: 0.25em 0.25em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+ul#words li.flagged {
+  color: #ec4;
+}
+
+em {
+  font-weight: bold;
+}
+
+ul#words:after,
+#container:after {
+  content: '';
+  display: block;
+  height: 0;
+  font-size: 0;
+  clear: both;
+}

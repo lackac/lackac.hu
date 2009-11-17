@@ -1,0 +1,20 @@
+--- 
+created_at: 2007-12-14 14:22:00 +01:00
+layout: post
+tags: "hatornot, hotornot, project, rubyonrails, gchartrb"
+title: "Hat or Not"
+typo_id: 16
+---
+<img src="http://hatornot.lackac.hu/images/logo.png" alt="Hat or Not" class="sideimage" width="200px" />
+
+A héten a [HotOrNot](http://hotornot.com) [volt](http://turulcsirip.hu/perma/491073692) a [téma](http://turulcsirip.hu/perma/491016162) twitteren. Ennek kapcsán [Kelt](http://worldshots.hu) ötletéből kiindulva született meg egy csavarral megspékelve [az első valódi magyar klón](http://hatornot.lackac.hu).
+
+A játék irtó egyszerű, meg kell mondanod, hogy a megjelenített szám hatos-e vagy nem. Nincs semmi furfang, nincs cél, csak egyszerűen ennyi. Hogy mi értelme van ennek az egésznek? Az összeesküvés elméletek kedvelői higgyék azt, hogy egy hatalmas pszichológiai adatgyűjtés áll az oldal mögött, ami az adatokból pontosan feltérképezi a felhasználók agyában a neuronok hálózatát, és ezt az adathalmazt dollármilliókért eladja a gonosz Google-nek. De valójában csak kedvem támadt egy egyszerű Railses játszadozáshoz, és ez az egy órás projekt tökéletes volt ehhez.
+
+Tehát az oldal mögött Rails fut, mongrel webszerverrel, és van benne néhány egyszerű Javascriptes ügyeskedés is. A játék során tényleg folyik adatgyűjtés a válaszokról, amiből szép [statisztikák](http://hatornot.lackac.hu/stats) készülnek [Google Chart](http://code.google.com/apis/chart/) segítségével. Itt el is érkeztünk a projekt másik értelméhez, ugyanis ezzel lehetőség adódott a Google új jóságának kipróbálására.
+
+Első körben nekiálltam saját Ruby wrappert írni a Google Charthoz, viszont eszembe jutott, hogy amit már más megcsinált, azzal legtöbbször nem érdemes szenvedni. Hamar rá is találtam [Deepak Jois](http://blog.deepak.jois.name/) [gchartrb](http://code.google.com/p/gchartrb/) projektjére, ami szinte tökéletes megoldást adott minden igényemre. Vannak még benne apróbb hiányosságok, de alapvetően jól használható.
+
+Tulajdonképpen ezzel vége is lehetne a dolognak, hiszen mit lehet még ezen fejleszteni. Viszont az az igazság, hogy ahogy elkészült az első verzió, Kelt és [Benedek](http://tothbenedek.hu) ontották a további feature requesteket. Ezekből el is készült már a billentyűzeten keresztüli kezelés, és a  továbbiakban tervezem még a felhasználó kezelést és Facebook alkalmazást is.
+
+Arra is rájöttem, hogy miért éri meg nekem ezzel foglalkoznom, annak ellenére, hogy várhatóan nem lesz hatalmas üzleti értéke. Állásajánlatoknál általában kérnek a jelentkezőktől referenciákat és jobb helyeken forráskódot is várnak. Ilyenkor az ember nem nyújthatja át nekik az előző munkaadójának készített még mindig online projekt forrását, hiszen legtöbbször ezt NDA védi, meg amúgy sem lenne etikus. Viszont egy ilyen ártalmatlan projekt forráskódja nyugodt szívvel átadható. Jól látszik belőle a használt kódolási stílus, technológiák, stb.

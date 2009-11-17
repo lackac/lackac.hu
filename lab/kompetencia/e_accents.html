@@ -1,0 +1,596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Koncentráció - e-betűk</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  function initialize() {
+    var start = function () {
+      new Accents('ctest', 'ệ', 90);
+      $('start_link').stopObserving('click', start);
+    };
+    $('start_link').observe('click', start);
+  }
+  Event.observe(window, 'load', initialize);
+
+  Accents = Class.create();
+  Accents.prototype = {
+    initialize: function (div, reference, time) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      this.reference = reference;
+      this.total = 0;
+
+      this.letters = this.div.getElementsBySelector('.letters .letter');
+      this._onLetterClick = this.onLetterClick.bindAsEventListener(this);
+      this.letters.each(function (letter) {
+        letter.observe('click', this._onLetterClick);
+        if (letter.innerHTML == this.reference) {
+          this.total++;
+        }
+      }.bind(this));
+
+      var timer_span;
+      if (!(timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+      this.timer = new Timer({update: timer_span, backwards: this.timeup.bind(this), from: time});
+
+      this._finish = this.finish.bindAsEventListener(this);
+      if (!(this.done_link = this.div.getElementsByClassName('done_link')[0])) return false;
+      this.done_link.observe('click', this._finish);
+
+      this.div.show();
+    },
+
+    onLetterClick: function(event) {
+      var letter = Event.element(event);
+      letter.addClassName('selected');
+      letter.stopObserving('click', this._onLetterClick);
+    },
+
+    check: function() {
+      this.correct = this.wrong = this.missed = 0;
+      this.letters.each(function (letter) {
+        if (letter.hasClassName('selected')) {
+          if (letter.innerHTML == this.reference) {
+            letter.addClassName('correct');
+            this.correct++;
+          }
+          else {
+            letter.addClassName('wrong');
+            this.wrong++;
+          }
+        } else {
+          if (letter.innerHTML == this.reference) {
+            letter.addClassName('missed');
+            this.missed++;
+          }
+          letter.stopObserving('click', this._onLetterClick);
+        }
+      }.bind(this));
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      this.check();
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\nHelyes: '+this.correct+'\nHibás: '+this.wrong+'\nKihagyott: '+this.missed+'\nIdő: '+this.timer.toString(true);
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'E-betűk\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+      this.done_link.stopObserving('click', this._finish);
+    }
+  }
+  //]]>
+  </script>
+
+  <style type="text/css" media="screen">
+    .letters {
+      width: 42em;
+    }
+    .letters br {
+      clear: both;
+    }
+    .letter {
+      float: left;
+      padding: 4px;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .letter.selected {
+      border: 1px solid #000080;
+      padding: 3px;
+      background-color: #c0c0ff;
+    }
+    .letter.correct {
+      border-color: #008000;
+      background-color: #c0ffc0;
+    }
+    .letter.wrong {
+      border-color: #800000;
+      background-color: #ffc0c0;
+    }
+    .letter.missed {
+      border: 1px solid #808000;
+      padding: 3px;
+      background-color: #ffffc0;
+    }
+    .done_link { clear: both; }
+  </style>
+</head>
+
+<body>
+<h1>Koncentráció</h1>
+<h2>e-betűk</h2>
+<p>Az alábbi sorok között többféle karaktert talál. Arra kérjük, hogy a rendelkezésére álló 1,5 perc alatt jelölje ki az összes <strong>ệ</strong> karaktert! Amint készen van, kattintson a lent található linkre!</p>
+<p><a href="#" onclick="return false;" id="start_link">Indít!</a></p>
+<div id="ctest" style="display: none;">
+  <p>Idő: <span class="timer"></span></p>
+  <div id="ctest_letters" class="letters">
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">è</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">è</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">e</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">è</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">ệ</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">è</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ê</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">è</span>
+    <span class="letter">e</span>
+    <span class="letter">é</span>
+    <span class="letter">ệ</span>
+    <span class="letter">ẹ</span>
+    <span class="letter">ê</span>
+    <br />
+  </div>
+  <a href="#" onclick="return false;" id="ctest_done_link" class="done_link">Kész!</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+  font-size: 16pt;
+}
+body div#container {
+  background-color: transparent;
+}
+body div#container * {
+  background-color: transparent;
+}

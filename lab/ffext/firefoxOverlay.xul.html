@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>firefoxOverlay.xul</title>
+
+  <link rel="stylesheet" href="css/defaults.css" type="text/css"/>
+  <link rel="stylesheet" href="css/blackboard.css" type="text/css"/>
+</head>
+
+<body>
+
+<div id="container">
+<pre class="blackboard"><span class="MetaTag"><span class="MetaTag">&lt;?</span><span class="MetaTag">xml</span><span class="MetaTag"> version</span>=<span class="String"><span class="String">&quot;</span>1.0<span class="String">&quot;</span></span><span class="MetaTag"> encoding</span>=<span class="String"><span class="String">&quot;</span>UTF-8<span class="String">&quot;</span></span><span class="MetaTag">?&gt;</span></span>
+<span class="MetaTag"><span class="MetaTag">&lt;?</span><span class="MetaTag">xml-stylesheet</span><span class="MetaTag"> href</span>=<span class="String"><span class="String">&quot;</span>chrome://tardis/skin/overlay.css<span class="String">&quot;</span></span><span class="MetaTag"> type</span>=<span class="String"><span class="String">&quot;</span>text/css<span class="String">&quot;</span></span><span class="MetaTag">?&gt;</span></span>
+<span class="MetaTag"><span class="MetaTag">&lt;!</span><span class="MetaTag">DOCTYPE</span> overlay SYSTEM &quot;chrome://tardis/locale/tardis.dtd&quot;<span class="MetaTag">&gt;</span></span>
+<span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">overlay</span> <span class="MetaTag">id</span>=<span class="String"><span class="String">&quot;</span>tardis-overlay<span class="String">&quot;</span></span></span>
+<span class="MetaTag">    <span class="MetaTag">xmlns</span>=<span class="String"><span class="String">&quot;</span>http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">script</span> <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>overlay.js<span class="String">&quot;</span></span><span class="MetaTag">/&gt;</span></span>
+  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">stringbundleset</span> <span class="MetaTag">id</span>=<span class="String"><span class="String">&quot;</span>stringbundleset<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+    <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">stringbundle</span> <span class="MetaTag">id</span>=<span class="String"><span class="String">&quot;</span>tardis-strings<span class="String">&quot;</span></span></span>
+<span class="MetaTag">                  <span class="MetaTag">src</span>=<span class="String"><span class="String">&quot;</span>chrome://tardis/locale/tardis.properties<span class="String">&quot;</span></span><span class="MetaTag">/&gt;</span></span>
+  <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">stringbundleset</span><span class="MetaTag">&gt;</span></span>
+
+  <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">menupopup</span> <span class="MetaTag">id</span>=<span class="String"><span class="String">&quot;</span>menu_ToolsPopup<span class="String">&quot;</span></span><span class="MetaTag">&gt;</span></span>
+    <span class="MetaTag"><span class="MetaTag">&lt;</span><span class="MetaTag">menuitem</span> <span class="MetaTag">id</span>=<span class="String"><span class="String">&quot;</span>tardis-who<span class="String">&quot;</span></span> <span class="MetaTag">label</span>=<span class="String"><span class="String">&quot;</span>&amp;tardis.label;<span class="String">&quot;</span></span> </span>
+<span class="MetaTag">              <span class="MetaTag">oncommand</span>=<span class="String"><span class="String">&quot;</span>tardis.onMenuItemCommand(event);<span class="String">&quot;</span></span><span class="MetaTag">/&gt;</span></span>
+  <span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">menupopup</span><span class="MetaTag">&gt;</span></span>
+<span class="MetaTag"><span class="MetaTag">&lt;/</span><span class="MetaTag">overlay</span><span class="MetaTag">&gt;</span></span>
+</pre>
+</div>
+
+</body>
+</html>

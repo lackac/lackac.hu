@@ -1,0 +1,17 @@
+--- 
+created_at: 2009-03-22 22:21:00 +01:00
+layout: post
+tags: "magyar, opensource, jruby"
+title: Földim
+typo_id: 65
+---
+A minap megoldást keresve egy Rails plugin JRubys inkompatibilitására egy levelezőlista archívumra bukkantam, ahol [Steven Bristol][1] éppen azzal a problémával próbált megküzdeni, mint amivel én is szembesültem. A plugin szerzőjét faggatta, és együtt próbáltak az ügy végére járni. Aztán valahol útközben elhalt a dolog, és mivel nekem mindenképp kellett valami megoldás, gondoltam megkeresem Stevent, és megkérdem meddig jutott. Nem is kellett sokat keresgélni, hamar megtaláltam a [Less Everything][2] oldalát, amin keresztül a Campfire chatszobában találtam meg Stevent.
+
+Hamar kiderült, hogy Steven testvérét is Lászlónak hívják, ami persze újabb kérdéseket vetett fel, és ekkor jött a nagy meglepetés. Nem elég, hogy magyar származásúak, de ráadásul hozzám hasonlóan ők is Nagyváradon születtek. Erre mondják, hogy milyen kicsi a világ, meg hogy magyarok lepik el az egész földet, vagy mi.
+
+A problémámban nem tudott sajnos segíteni, de végül [egyedül is sikerült][3] vele megküzdeni, aminek [ő is igazán örült][4]. Éljen az open source szellem.
+
+[1]: http://www.workingwithrails.com/person/6290-steven-a-bristol
+[2]: http://lesseverything.com
+[3]: http://github.com/lackac/thinking-sphinx/tree/jruby
+[4]: http://twitter.com/stevenbristol/statuses/1355788469

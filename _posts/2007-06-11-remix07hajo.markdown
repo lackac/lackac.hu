@@ -1,0 +1,24 @@
+--- 
+created_at: 2007-06-11 23:06:00 +02:00
+layout: post
+tags: "remix07 silverlight ruby ironruby"
+title: "REMIX 07 remix"
+typo_id: 12
+---
+Mennyi mindent meg tud változtatni egy személyes beszélgetés. Az előző bejegyzéshez képest egy hajókázással később már kicsit más vélemény él bennem a Microsoftról. Persze, természetesen, hiszen megvettek egy hajóúttal, mondhatnátok. De nem. A hajóút nagy részét amúgy nem a parti részen, hanem a bloggertájékoztatón töltöttem. Na meg a megvételhez kellett volna még egy Vistával, Visual Studio 'Orcas'-szal meg Expression Studioval felszerelt [Ferraris Notebook](http://www.istartedsomething.com/20061227/microsoft-free-ferrari/) is.
+
+<img src="http://farm2.static.flickr.com/1403/930469465_613f090cb1_d.jpg" alt="Blogger tájékoztató Scott Guthrieval" class="fullimage" /></div>
+
+Szóval mégis mi az ami változott. Leginkább az, hogy válaszokat kaptam azokra a kérdésekre, amelyek a legjobban érdekeltek a Silverlighttal kapcsolatban. [Scott Guthrie](http://weblogs.asp.net/scottgu/) tök jó fej, értelmesen lehet vele beszélgetni, és hallott már a [Rubyról](http://www.ruby-lang.org/en/), [ActiveRecordról](http://wiki.rubyonrails.com/rails/pages/ActiveRecord) és még a [TextMateről](http://macromates.com/) is.
+
+A kérdések során kiderült, hogy a Silverlight nem akarja lecserélni a html-t, inkább csak egy kiegészítő technológia. Hasonlítgattuk Flash-hez is, ott persze a Silverlight 1.1-hez képest a Flash rendben alulmaradt. Szó esett a <del>Linkről</del> <ins>[LINQről](http://msdn.microsoft.com/data/ref/linq/)</ins> (<del>remélem jól kaptam el a nevét</del> <ins>kösz a javítást, Balázs</ins>), ami a jövőben fog majd kijönni, és egy adatkapcsolati réteg lesz, aminek használatával nagyon könnyen lehet mindenféle újrahasználható webservice klienseket vagy sql-hez Object Relational Mappinget írni (magyarul ez hogy van?).
+
+Ami engem viszont leginkább érdekelt, az a Macintosh platformhoz és a Rubyhoz fűződő kérdések voltak. Azt, hogy lesz-e *fejlesztői támogatás Mac OS X-re*, már más megkérdezte helyettem. A válasz az, hogy hivatalosan biztosan nem a közeljövőben, de talán a későbbiekben készülhet Macre is valamilyen IDE Silverlighthoz. Pontosan azt mondta, hogy a dolog *megvalósítható, de a fókusz most nem ezen van*. Másrészt a közösség már most is dolgozik ezen. Említett TextMate-hez egy XAML bundle-t, de nekem ezt nem sikerült most öt perc alatt megtalálnom. Viszont helyette ezt az idézetet találtam [egy Mix 07-ről írt blogbejegyzésben](http://www.hanselman.com/blog/PuttingMixSilverlightTheCoreCLRAndTheDLRIntoContext.aspx):
+
+> One great part of the demo was done entirely in TextMate on a Mac where ScottGu created a Silverlight XAML file and CodeBehind in IronRuby. There was no Visual Studio or C# to be seen.
+
+Szóval ez az amire én is vágyom. Persze ez önmagában még nem lesz elég ahhoz, hogy ezután kizárólag Silverlight fejlesztő legyek, de még nem vették el a pesszimisták a kedvemet attól, hogy nagy lehetőségeket lássak a platformban.
+
+Arra a kérdésemre, hogy mikor is várhatunk egy *IronRuby kiadást*, azt a választ kaptam, hogy *a júliusi OSCON-ra terveznek egy korai verziót*. Ez még biztosan nem egy 1.0 kiadás lesz, hanem egy olyan változat, amellyel az alap dolgok már elég jól mennek. Szóval júliusban lehet már próbálgatni. Addig is lehet hogy adok egy próbát az IronPythonnak, és ha érdekes lesz, akkor írok majd arról is.
+
+Visszagondolva az előadásokra úgy érzem, nem azokkal volt a gond, hanem inkább azzal, hogy nem nekem szóltak. Egy ilyen beszélgetés már sokkal inkább megfogott. Megint megtanultam, hogy az ingyen konferencia sem feltétlen az ingyen kaja miatt jó, hanem a kapcsolatépítés miatt.

@@ -1,0 +1,15 @@
+--- 
+created_at: 2007-04-29 11:08:00 +02:00
+layout: post
+tags: "blog greeting"
+title: "Hát ez is elkészült"
+typo_id: 3
+---
+Már régóta terveztem, hogy indítok egy blogot, amelyen engem foglalkoztató dolgokról írok. Mindeddig azonban ez ennyiben maradt. Mostanában viszont egyre többször jött újra elő a gondolat, és ezúttal ezt tett is követte. Kellett egy olyan hely, ahol leírhatom, ha valami érdekes dologgal, vagy kihívással találom szembe magam.
+
+Ugyanakkor egy olyan hely is kellett, ahol kipróbálhatok mindenfélét. Ezért is használom a [Typo][] blogmotort, mert így ha ki akarok próbálni valami újat, akkor azt azokkal az eszközökkel tehetem meg, amelyeket legszívesebben használok, ha webfejlesztésről van szó.
+
+Bővebb információ a [Rólam](/pages/about.html) szekcióban található. A [Laborba](/tag/project.html) fognak felkerülni azok a projektek, amelyeken dolgozom, illetve fent van még egy [hResume][] mikroformátum alapján szerkesztett [önéletrajzom](/pages/resume.html) is.
+
+[typo]: http://typosphere.org
+[hresume]: http://microformats.org/wiki/hresume

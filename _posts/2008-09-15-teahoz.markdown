@@ -1,0 +1,57 @@
+--- 
+created_at: 2008-09-15 15:39:18 +02:00
+layout: post
+tags: "teatime passenger query_memcached webby ai ruby"
+title: Teához
+typo_id: 58
+---
+Hétvégén volt időm végre olyan dolgokkal is foglalkozni, amit a sok munka miatt már jó ideje tologatok. Ezek egyike az volt, hogy elolvastam, és kipróbálgattam pár dolgot, amik már régóta ott figyeltek nyitott tabokban a böngészőmben. Ezek közül válogatok most egy párat.
+
+De előbb megemlíteném, hogy a héten lesz a [budapest.rb][1]. Persze ezt már úgyis mindenki tudja, úgyhogy ez felesleges volt. A hétvégén összeraktam a saját előadásom slide-jait, és megérkeztek a többi előadótól az absztraktok is. Ezeket a meetup oldalán megtaláljátok. Újból jelezném azt is, hogy ha valakinek van érdekes témája, amiről előadna, vagy ajánlana valakit, akkor bátran írjon. Most pedig nézzük a techmorzsákat.
+
+[1]: http://ruby.meetup.com/139/
+
+### Phusion Passenger
+
+Múlt héten átkonfiguráltam a belső teszt szervereinket [Phusion Passenger][2] és [Ruby Enterprise Edition][3] használatára. Eddig főként a könnyebb és gyorsabb deployment jött elő azonnali nyereségként, de majd teljesítményt is fogok vizsgálni. Elsőre gyorsabbnak tűnik, de lehet csak azért mert ezt várom tőle. Ha lesz majd kis időm, összevetem az átállás után keletkezett logokat a korábbiakkal.
+
+Hétvégén a saját szerveremen is megléptem a váltást. Itt inkább a rendszer egy másik nagy előnye miatt, ti. hogy így nem kell minden alkalmazást mindig futtatni, amire valaha szükség lehet. Elég sok sideproject fut a szerveren, és ha mindegyiknek adnék egy-két processt, akkor teljesen megennék a gépet. Viszont ezeknek nincs túl nagy látogatottsága, nem is nagyon szokott egy-kettőnél több egyszerre aktív lenni. Szóval erre kiváló a Passenger. Ha nem kell, nem futtatja, ha meg jobban kell, indít többet is.
+
+[2]: http://www.modrails.com/
+[3]: http://www.rubyenterpriseedition.com/
+
+### Query Memcached
+
+A Virgoban dolgozunk egy olyan projekten, ahol a sok összefonódott funkcionalitás és bonyolult jogosultsági rendszer miatt nem igazán lehet jól cache-elni. Ilyen esetekben lehet jó a Query Cache, ami bár alapból megtalálható Railsben, de csak egy requestre korlátozva. A [Query Memcached][4] plugin épp ezen próbál változtatni. Tetszik benne, hogy a queryket vizsgálja is, így a cache invalidálás egy részét megoldja nekünk. Valószínűleg megtartjuk.
+
+[4]: http://www.inwebwetrust.net/post/2008/09/08/query-memcached
+
+### Webby
+
+Ha csak egy egyszerű oldalt szeretnénk összerakni, sokszor a Rails vagy akár más kisebb keretrendszerek használata overkill. Ilyenkor hasznos lehet a [Webby][5], ami egy egyszerű statikus oldalt generáló Ruby alkalmazás. Kiválasztod a felépítést, csinálsz magadnak layoutot, aztán txt fájlokat írogatsz. Lehet használni ERB-t textile-t vagy markdownt. Szóval mindent, amire szükség lehet egy egyszerű oldalhoz. Kezdésnek biztos valami egyszerű webby alapú oldalt fogunk összerakni a [ruby.meetup.hu][7] oldalhoz is, aztán ha lesz időnk írunk valami egyszerű Merb alapú blogot. Mike Clark írt egy [részletes leírást az első lépésekről][6], az ötlet onnan jött.
+
+[5]: http://webby.rubyforge.org/
+[6]: http://www.clarkware.com/cgi/blosxom/2008/08/06#Webby
+[7]: http://ruby.meetup.hu/
+
+### AI sorozat Ola Binitől
+
+Ola Bini (JRuby core fejlesztő) egy érdekes sorozatba kezdett a blogján. A téma [mesterséges intelligencia programozás Rubyban][8]. Az első rész [természetes nyelvi szövegek][9] generálásáról szól, tegnap pedig a következő is felkerült az [általános probléma megoldóról][10]. Ha izgat a MI, feltétlen nézz bele, izgalmas sorozatnak ígérkezik.
+
+[8]: http://olabini.com/blog/2008/09/paradigms-of-artificial-intelligence-programming-in-ruby/
+[9]: http://olabini.com/blog/2008/09/language-generation/
+[10]: http://olabini.com/blog/2008/09/the-general-problem-solver-part-1/
+
+### Ami még érdekes volt
+
+* [Active Presenter][11], ha több modellt kell együtt kezelni (például egy formon)
+* [daemon_controller][12], ha kezünk alá dolgozó, robosztus daemon kezelést szeretnénk
+* [Sphinx][13], szöveg indexeléshez. Mostanában ezt hype-olják, meg kellene nézni, mert a jelenleg használt ferret megoldással több probléma van, mint amit megold. Ebbe a témába még egyáltalán nem mélyedtem bele, azt se tudom mit linkeljek, úgyhogy ittvan még kettő: [két sphinx pluginról][13a], meg [a full-text searching kánaánról][13b]
+* [Sake][14], ha az általánosan használt szkriptjeinket szeretnénk rendszerezni, itt vannak jó tippek arra is, hogy ezt hogy tudjuk még könnyebbé tenni.
+
+[11]: http://jamesgolick.com/2008/7/28/introducing-activepresenter-the-presenter-library-you-already-know
+[12]: http://blog.phusion.nl/2008/08/25/daemon_controller-a-library-for-robust-daemon-management/
+[13]: http://freelancing-gods.com/posts/a_concise_guide_to_using_thinking_sphinx
+[13a]: http://reinh.com/blog/2008/07/14/a-thinking-mans-sphinx.html
+[13b]: http://locomotivation.com/2008/07/15/mulling-over-our-ruby-on-rails-full-text-search-options
+[14]: http://drnicwilliams.com/2008/08/19/my-attempt-at-sake-task-management/

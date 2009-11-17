@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Rendszerszemlélet - négyzetkirakás</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop,builder" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+  <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+  <script src="javascripts/clock.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var ctest;
+  function initialize() {
+    ctest = new SquarePuzzle('ctest');
+  }
+  Event.observe(window, 'load', initialize);
+
+  Shape = Class.create();
+  Shape.Rotation = [0, 90, 180, 270];
+  Shape.BaseImgPath = 'images/';
+  Shape.selected = false;
+  Shape.onKeyPress = function(event) {
+    if (Shape.selected && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+      switch (event.keyCode) {
+        case Event.KEY_LEFT:
+          Shape.selected.rotateLeft();
+          Event.stop(event);
+          break;
+        case Event.KEY_RIGHT:
+          Shape.selected.rotateRight();
+          Event.stop(event);
+          break;
+      }
+    }
+  }
+  Shape.shapes = [];
+  Event.observe(window, 'keypress', Shape.onKeyPress);
+  Shape.prototype = {
+    baseInitialize: function(container, pos, form, rotation) {
+      container = $(container);
+      this.form = form;
+      this.rotation = rotation || Shape.Rotation;
+      this.angle = Math.floor(Math.random()*this.rotation.length);
+      var srcbase = Shape.BaseImgPath+form;
+      this.img_sources = this.rotation.map(function (angle) {return srcbase+angle+'.gif';}.bind(this));
+      this.element = Builder.node('img', {src: this.img_sources[this.angle], class: 'shape '+form});
+      this.preloadImages();
+      container.appendChild(this.element);
+      this.element.style.left = (pos[0] || 0)+'px';
+      this.element.style.top  = (pos[1] || 0)+'px';
+      this._select = this.select.bindAsEventListener(this);
+      this.element.observe('click', this._select);
+      Shape.shapes.push(this);
+    },
+
+    getPosition: function() {
+      return {
+        left   : parseInt(this.element.getStyle('left')),
+        top    : parseInt(this.element.getStyle('top')),
+        width  : parseInt(this.element.getStyle('width')),
+        height : parseInt(this.element.getStyle('height')),
+      };
+    },
+
+    initDraggable: function() {
+      this.draggable = new Draggable(this.element, {
+        revert: function() {
+          if (!this.element.parentNode.hasClassName('target')) {
+            var pos = this.getPosition();
+            if (pos.left < 0)
+              this.element.style.left = '0px';
+            if (pos.left > 406-pos.width)
+              this.element.style.left = 406-pos.width+'px';
+            if (pos.top < 0)
+              this.element.style.top = '0px';
+            if (pos.top > 304-pos.height)
+              this.element.style.top = 304-pos.height+'px';
+          }
+          return false;
+        }.bind(this)
+      });
+    },
+
+    preloadImages: function() {
+      this.img_sources.each(function(src) {
+        Builder.node('img', {src: src});
+      });
+    },
+
+    correctPos: function(dim) {
+      var pos = this.getPosition();
+      var x = pos.left + Math.floor((dim.width  - pos.width)/2);
+      var y = pos.top  + Math.floor((dim.height - pos.height)/2);
+      if (this.element.parentNode.hasClassName('target')) {
+        var temp = this.snapInTarget(x, y);
+        x = temp[0];
+        y = temp[1];
+      }
+      this.element.style.left = x+'px';
+      this.element.style.top  = y+'px';
+    },
+
+    rotateLeft: function() {
+      var dim = this.getPosition();
+      this.angle = (this.angle+1)%this.rotation.length;
+      this.element.src = this.img_sources[this.angle];
+      if (dim.width != dim.height) {
+        this.correctPos(dim);
+      }
+    },
+
+    rotateRight: function() {
+      var dim = this.getPosition();
+      this.angle = (this.angle+this.rotation.length-1) % this.rotation.length;
+      this.element.src = this.img_sources[this.angle];
+      if (dim.width != dim.height) {
+        this.correctPos(dim);
+      }
+    },
+
+    snapInTarget: function(x,y) {
+      return [parseInt(this.element.getStyle('width'))  <= 50 ? Math.max(-2, Math.min(48, Math.round(x/50)*50-2)) : -2,
+              parseInt(this.element.getStyle('height')) <= 50 ? Math.max(-2, Math.min(48, Math.round(y/50)*50-2)) : -2];
+    },
+
+    select: function() {
+      if (Shape.selected !== this) {
+        if (Shape.selected) {
+          Shape.selected.deselect();
+        }
+        Shape.selected = this;
+        this.element.addClassName('selected');
+      }
+    },
+
+    deselect: function() {
+      if (this === Shape.selected) {
+        Shape.selected = false;
+        this.element.removeClassName('selected');
+        if (this.element.parentNode.hasClassName('target')) {
+          this.draggable.destroy();
+          this.element.stopObserving('click', this._select);
+          this.element.observe('click', function() {
+            var pos = this.getPosition();
+          }.bind(this));
+        }
+      }
+    },
+  }
+  
+  Triangle = Class.create();
+  Object.extend(Object.extend(Triangle.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'triangle');
+    },
+  });
+  BigTriangle = Class.create();
+  Object.extend(Object.extend(BigTriangle.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'bigtriangle');
+    },
+  });
+  Square = Class.create();
+  Object.extend(Object.extend(Square.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'square', [0]);
+    },
+  });
+  Rectangle = Class.create();
+  Object.extend(Object.extend(Rectangle.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'rectangle', [0, 90]);
+    },
+  });
+  RightTrapeze = Class.create();
+  Object.extend(Object.extend(RightTrapeze.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'righttrapeze');
+    },
+  });
+  LeftTrapeze = Class.create();
+  Object.extend(Object.extend(LeftTrapeze.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'lefttrapeze');
+    },
+  });
+  ConcaveShape = Class.create();
+  Object.extend(Object.extend(ConcaveShape.prototype, Shape.prototype), {
+    initialize: function(container, pos) {
+      this.baseInitialize(container, pos, 'concaveshape');
+    },
+  });
+
+  Target = Class.create();
+  Target.solutions = {
+    bigtriangle  : [{ righttrapeze: [2, -2, -2], triangle: [2, 48, 48] }],
+    rectangle    : [{ righttrapeze: [0, -2, 48], triangle: [2, 48, 48] },
+                    { righttrapeze: [2, -2, 48], triangle: [0, -2, 48] }],
+    lefttrapeze  : [{ righttrapeze: [1, 48, -2], square  : [0, -2, 48] }],
+    concaveshape : [{ triangle    : [2, 48, -2], square  : [0, -2, 48] }],
+  }
+  Target.prototype = {
+    initialize: function(element, container) {
+      this.element = $(element);
+      this.shapes = [];
+      this.droppable = Droppables.add(this.element, {
+        accept: 'shape',
+        containment: container,
+        hoverclass: 'hover',
+        onDrop: function(img) {
+          var shape = Shape.shapes.select(function (shape) { return shape.element == img }.bind(this))[0];
+          this.element.appendChild(img);
+          this.shapes.push(shape);
+          img.style.left = '-2px';
+          img.style.top  = '-2px';
+          shape.draggable.destroy();
+          shape.draggable = new Draggable(shape.element, {snap: shape.snapInTarget.bind(shape)});
+        }.bind(this)
+      });
+    },
+
+    findSpecial: function() {
+      return this.shapes.select(function(shape) {return ['bigtriangle','rectangle','lefttrapeze','concaveshape'].include(shape.form);});
+    },
+
+    check: function() {
+      var points = 0;
+      this.findSpecial().each(function (special) {
+        var pmax = 0;
+        while (special.angle != 0 || special.getPosition().top != -2) {
+          this.rotate();
+        }
+        Target.solutions[special.form].each(function (solution) {
+          var p = 0;
+          $H(solution).each(function (pair) {
+            this.shapes.each(function (shape) {
+              if (shape.form == pair[0]) {
+                var pos = shape.getPosition();
+                if (shape.angle == pair[1][0] && pos.left == pair[1][1] && pos.top == pair[1][2]) {
+                  p++;
+                  throw $break;
+                }
+              }
+            }.bind(this));
+          }.bind(this));
+          if (p > pmax) {
+            pmax = p;
+          }
+        }.bind(this));
+        if (pmax > points) {
+          points = pmax;
+        }
+      }.bind(this));
+      return points;
+    },
+
+    rotate: function() {
+      this.shapes.each(function (shape) {
+        var pos = shape.getPosition();
+        shape.rotateRight();
+        if (pos.width == 100 && pos.height == 100) {
+        }
+        else if (pos.width == 100) {
+          if (pos.left == -2 && pos.top == -2) {
+            shape.element.style.left = '48px';
+          }
+          else if (pos.left == -2 && pos.top == 48) {
+            shape.element.style.top = '-2px';
+          }
+        }
+        else if (pos.height == 100) {
+          if (pos.left == 48 && pos.top == -2) {
+            shape.element.style.left = '-2px';
+            shape.element.style.top  = '48px';
+          }
+        }
+        else {
+          if (pos.left == -2 && pos.top == -2) {
+            shape.element.style.left = '48px';
+          }
+          else if (pos.left == 48 && pos.top == -2) {
+            shape.element.style.top = '48px';
+          }
+          else if (pos.left == 48 && pos.top == 48) {
+            shape.element.style.left = '-2px';
+          }
+          else if (pos.left == -2 && pos.top == 48) {
+            shape.element.style.top = '-2px';
+          }
+        }
+      });
+    }
+  }
+
+  SquarePuzzle = Class.create();
+  SquarePuzzle.prototype = {
+    initialize: function (div) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      this._startPuzzle = this.startPuzzle.bindAsEventListener(this);
+      if (!(this.start_link = this.div.getElementsByClassName('start_link')[0])) return false;
+      this.start_link.observe('click', this._startPuzzle);
+
+      if (!(this.timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+      this.timer_span.update('03:00');
+      this.timer = false;
+
+      if (!(this.done_link = this.div.getElementsByClassName('done_link')[0])) return false;
+
+      var container;
+      if (!(container = this.div.getElementsByClassName('container')[0])) return false;
+
+      var shape_classes = [Triangle, Triangle, Triangle, BigTriangle, Square, Square, Rectangle,
+                           LeftTrapeze, RightTrapeze, RightTrapeze, RightTrapeze, ConcaveShape];
+      var x = 0, y = 0;
+      while (shape_classes.length > 0) {
+        var i = Math.floor(Math.random()*shape_classes.length);
+        new shape_classes[i](container, [x,y]);
+        shape_classes.splice(i, 1);
+        x += 102;
+        if (x > 400) {
+          y += 102;
+          x = 0;
+        }
+      }
+
+      this.targets = [];
+      var targets = this.div.getElementsBySelector('.target');
+      targets.each(function (target) {
+        this.targets.push(new Target(target, container));
+      }.bind(this));
+
+      this.div.show();
+    },
+
+    startPuzzle: function() {
+      Shape.shapes.each(function (shape) {
+        shape.initDraggable();
+      });
+      this.timer = new Timer({update: this.timer_span, backwards: this.timeup.bind(this), from: 180});
+      this.start_link.stopObserving('click', this._startPuzzle);
+      this._finish = this.finish.bindAsEventListener(this);
+      this.done_link.observe('click', this._finish);
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      if (Shape.selected) {
+        Shape.selected.deselect();
+      }
+      Shape.shapes.each(function (shape) { shape.draggable.destroy(); shape.element.stopObserving('click', shape._select); });
+      var points = 0;
+      this.targets.each(function (target) { points += target.check(); }.bind(this));
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\nPont: '+points+'/8\nIdő: '+this.timer.toString();
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Négyzetkirakás\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+    }
+  }
+  //]]>
+  </script>
+
+  <style type="text/css" media="screen">
+    .container {
+      position: relative;
+      float: left;
+      margin: 10px;
+      border: 1px solid black;
+      width: 406px;
+      height: 304px;
+    }
+    .shape {
+      position: absolute;
+      padding: 2px;
+    }
+    .shape.selected {
+      border: 1px dotted blue;
+      padding: 1px;
+    }
+    .target {
+      position: relative;
+      float: left;
+      margin: 5px;
+      border: 1px solid black;
+      width: 100px;
+      height: 100px;
+    }
+    .target.hover {
+      border: 1px dashed red;
+    }
+  </style>
+</head>
+
+<body>
+<h1>Rendszerszemlélet</h1>
+<h2>Négyzetkirakás</h2>
+<div id="ctest" style="display: none;">
+  <p>Az alábbi tizenkét elemből rakjon ki négy darab négyzetet! Négy üres keret áll rendelkezésre, amelyekbe csoportosíthatja az elemeket. Felhívjuk a figyelmét, hogy a már egyszer lerakott elemet nem viheti el a csoportból, csak a kereten belül forgathatja, és egy másik elem megfogásával pozíciója véglegessé válik. Három perc áll rendelkezésére. Az elemeket kiválasztás után a jobbra/balra billentyűkkel forgathatja.</p>
+  <p><a href="#" onclick="return false;" id="ctest_start_link" class="start_link">Indít!</a></p>
+  <div id="ctest_timer" class="timer"></div>
+  <div id="ctest_container" class="container">
+  </div>
+  <div id="ctest_target_1" class="target"></div>
+  <div id="ctest_target_2" class="target"></div>
+  <div id="ctest_target_3" class="target"></div>
+  <div id="ctest_target_4" class="target"></div>
+  <p class="clear"><a href="#" onclick="return false;" id="ctest_done_link" class="done_link">Kész</a></p>
+</div>
+</body>
+</html>

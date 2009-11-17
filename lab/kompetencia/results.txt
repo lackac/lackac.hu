@@ -1,0 +1,450 @@
+Name: Edit
+Results: Képrendezés - konzulatus
+A megoldás hibás!
+Lépések száma: 4
+Idő: 02:40
+
+Name: Edit
+Results: Képrendezés - konzulatus
+A megoldás helyes!
+Lépések száma: 6
+Idő: 01:40
+
+Name: Edit
+Results: E-betűk
+Az idő lejárt.
+Helyes: 39
+Hibás: 0
+Kihagyott: 21
+Idő: 01:30
+
+Name: Edit
+Results: Teljesítmény-elvárás
+1. lépés: 7 karakter / 30 mp
+2. lépés: 1 perc alatti karakterszám becsült: 16, tényleges: 29
+3. lépés: 1 perc alatti karakterszám becsült: 32, tényleges: 34
+
+Name: Edit
+Results: Képrendezés - horgasz
+A megoldás helyes!
+Lépések száma: 4
+Idő: 00:50
+
+Name: Edit
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika: 1.6,0.7,0.6,0.6,0.8,0.8,0.8,0.6,0.8,0.8,0.6,0.8,0.7,0.6,0.6,0.7,0.8,0.6,0.6,0.7
+Téves riasztások száma: 0
+
+Name: Edit
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika: késő,0.7,késő,0.6,0.5
+Téves riasztások száma: 4
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: Edit
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Teszt vége.
+Statisztika: 
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Pont: 8/8
+Idő: 02:12
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Pont: 7/8
+Idő: 01:00
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Pont: 8/8
+Idő: 01:21
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 1/1
+Idő: 00:00
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 1/1
+Idő: 00:00
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 1/1
+Idő: 00:00
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 0/1
+Idő: 00:00
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 1/1
+Idő: 00:04
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 2/2
+Idő: 00:29
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 2/2
+Idő: 00:29
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 3/3
+Idő: 00:29
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 1/3
+Idő: 00:08
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 0/3
+Idő: 00:15
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 5/5
+Idő: 02:35
+
+Name: 
+Results: Hiányzó ábrák
+Kész.
+Eredmény: 0/5
+Idő: 00:03
+
+Name: 
+Results: Kakukktojás
+Kész.
+Eredmény: 4/5
+Idő: 00:13
+
+Name: 
+Results: Kakukktojás
+Kész.
+Eredmény: 5/5
+Idő: 00:18
+
+Name: 
+Results: Kakukktojás
+Kész.
+Eredmény: 0/5
+Idő: 00:07
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Pont: 8/8
+Idő: 01:45
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Törlések száma: 1
+Rendezések száma: 3
+Idő: 00:14
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Törlések száma: 2
+Rendezések száma: 1
+Idő: 00:42
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás helyes.
+Törlések száma: 0
+Rendezések száma: 2
+Idő: 00:30
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás helyes.
+Törlések száma: 0
+Rendezések száma: 0
+Idő: 00:11
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Törlések száma: 0
+Rendezések száma: 1
+Idő: 00:17
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Törlések száma: 1
+Rendezések száma: 0
+Idő: 00:42
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Damerau-Levenshtein távolság: 1
+Törlések száma: 0
+Rendezések száma: 1
+Idő: 00:21
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Damerau-Levenshtein távolság: 2
+Törlések száma: 0
+Rendezések száma: 1
+Idő: 00:14
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Damerau-Levenshtein távolság: 2
+Törlések száma: 0
+Rendezések száma: 1
+Idő: 00:16
+
+Name: 
+Results: Útvonaltervezés
+Az idő lejárt.
+A megoldás hibás.
+Damerau-Levenshtein távolság: 2
+Törlések száma: 0
+Rendezések száma: 1
+Idő: 00:25
+
+Name: 
+Results: E-betűk
+Az idő lejárt.
+Helyes: 4
+Hibás: 2
+Kihagyott: 56
+Idő: 00:17
+
+Name: 
+Results: Képrendezés - konzulatus
+Az idő lejárt.
+A megoldás hibás!
+Lépések száma: 3
+Idő: 00:26
+
+Name: 
+Results: E-betűk
+Az idő lejárt.
+Helyes: 18
+Hibás: 2
+Kihagyott: 42
+Idő: 00:37
+
+Name: 
+Results: Hiányzó számok
+Kész.
+Eredmény: 1/5
+Idő: 01:27
+
+Name: 
+Results: Teljesítmény-elvárás
+1. lépés: 7 karakter / 9 mp
+2. lépés: 1 perc alatti karakterszám becsült: 45, tényleges: 5
+3. lépés: 1 perc alatti karakterszám becsült: 23, tényleges: 2
+
+Name: 
+Results: Négyzetkirakás
+Az idő lejárt.
+Pont: 6/8
+Idő: 01:56
+
+Name: 
+Results: Kakukktojás
+Kész.
+Eredmény: 0/5
+Idő: 00:13
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika: 0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.8,0.5,0.7,1.1,0.5,0.5,0.7,0.7,0.6,0.6,0.7,0.5,0.5,0.7,
+Téves riasztások száma: 3
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika: késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,1.5,0.2,0.1,1.7,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,
+Téves riasztások száma: 17
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika: 0.2,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,késő,
+Téves riasztások száma: 45
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika:
+Téves riasztások száma: 3
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika:
+Téves riasztások száma: 1
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika:
+1. rész: 0.6,0.7
+2. rész: 0.5
+3. rész: késő
+Téves riasztások száma: 4
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika:
+egész - átlag:0.3, talált:3, téves:2
+1. rész - átlag:0.5, talált:1, téves:undefined
+2. rész - átlag:0.6, talált:2, téves:undefined
+3. rész - átlag:0, talált:0, téves:undefined
+Téves riasztások száma: 1
+
+Name: 
+Results: Figyelem - vigilancia
+Teszt vége.
+Statisztika:
+egész - átlag:0.8, talált:4, téves:2
+1. rész - átlag:0.6, talált:1, téves:1
+2. rész - átlag:1.1, talált:1, téves:0
+3. rész - átlag:0.7, talált:2, téves:1
+Téves riasztások száma: 1
+

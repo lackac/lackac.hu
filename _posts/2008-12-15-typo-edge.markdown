@@ -1,0 +1,46 @@
+--- 
+created_at: 2008-12-15 20:43:00 +01:00
+layout: post
+tags: "typo blog"
+title: "Typo Edge"
+typo_id: 61
+---
+Akartam írni az blog frissítéséről, meg kapcsolódó dolgokról, Typo Edge alapú blogolásról egy bejegyzést, de az egész bejegyzés véletlen Back gomb nyomás áldozata lett. Töményítve még van erőm reprodukálni, itt van, okuljatok:
+
+### Typo Edge belövés
+
+{% highlight console %}
+$ git clone git://github.com/fdv/typo.git
+$ cd typo
+$ git submodule init
+$ git submodule update
+$ cp config/database.yml{.example,} && vim cp config/database.yml
+$ cp config/mail.yml{.example,} && vim cp config/mail.yml
+$ rake db:create
+$ rake db:migrate
+{% endhighlight %}
+
+Ha extra path alatt akarjuk látni (pl. http://lackac.hu/blog), akkor `config/environment.rb`-be:
+
+{% highlight ruby %}
+config.action_controller.relative_url_root = '/blog'
+{% endhighlight %}
+
+És aztán webszerverben is beállítani ugyanezt. Passengerben két apró lépés kell:
+
+{% highlight console %}
+$ ln -s /path/to/typo/public /path/to/my/site/root/blog
+{% endhighlight %}
+
+{% highlight apache %}
+<VirtualHost *>
+    # ...
+    RailsBaseURI /blog
+    # ...
+</VirtualHost>
+{% endhighlight %}
+
+### Typo témák
+
+Alapból talán négy téma van Typoban, sokat nem lehet gyönyörködni bennük. Ha egyedi designt akarsz, akkor a Scribbish témára lehet alapozni egy sajátot. Egyébként pedig a [Typogardenben](http://typogarden.org/2008/) érdemes körülnézni. Az itt található témák elég régiek és nagy valószínűséggel tartalmaznak elavult kódrészleteket. Ha kipróbálsz egyet, akkor érdemes development logot böngészni közben és a deprecation warningokat kijavítgatni. Pár témával megtettem ezt, ezeket a typo repo forkomban [themes branch](http://github.com/lackac/typo/tree/themes/themes) alatt megtalálhatjátok.
+

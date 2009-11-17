@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Rendszerszemlélet - képrendezés</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  function initialize() {
+    //$('horgasz_link').observe('click', function () {
+    //  new ImageOrder('ctest', 'horgasz');
+    //});
+    $('konzulatus_link').observe('click', function () {
+      new ImageOrder('ctest', 'konzulatus');
+    });
+  }
+  Event.observe(window, 'load', initialize);
+
+  ImageOrder = Class.create();
+  ImageOrder.Options = {
+    horgasz:    "5&6&4&3&1&2",
+    konzulatus: "5&3&6&2&4&1",
+  };
+  ImageOrder.prototype = {
+    initialize: function (div, option) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+      this.option = option;
+      if (!ImageOrder.Options[this.option]) return false;
+
+      var timer_span;
+      if (!(timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+      this.timer = new Timer({update: timer_span});
+      this.timer.registerEvent(180, this.timeup.bind(this));
+
+      if (!(this.sorting_box = this.div.getElementsByClassName('sorting_box')[0])) return false;
+      this.sorting_box.update('');
+      this.sorting_box.moves = 0;
+
+      for (var i=1; i<=6; i++) {
+        var img = document.createElement('img');
+        img.src = 'images/'+this.option+'_'+i+'.png';
+        img.id  = this.option+'_'+i;
+        this.sorting_box.appendChild(img);
+      }
+      Sortable.create(this.sorting_box, { tag: 'img', overlap: 'horizontal', constraint: false,
+        onUpdate: function(container) {
+          container.moves = container.moves || 0;
+          container.moves++;
+        }
+      });
+
+      this._finish = this.finish.bindAsEventListener(this);
+      if (!(this.done_link = this.div.getElementsByClassName('done_link')[0])) return false;
+      this.done_link.observe('click', this._finish);
+
+      this.div.show();
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      this.result = Sortable.serialize(this.sorting_box).replace(/[^0-9&]/g, '') == ImageOrder.Options[this.option];
+      Sortable.destroy(this.sorting_box);
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\n'+(this.result ? 'A megoldás helyes!\n' : 'A megoldás hibás!\n')+
+        'Lépések száma: '+(this.sorting_box.moves || 0)+'\nIdő: '+this.timer.toString();
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Képrendezés - '+this.option+'\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+      this.done_link.stopObserving('click', this._finish);
+    }
+  }
+  //]]>
+  </script>
+</head>
+
+<body>
+<h1>Rendszerszemlélet</h1>
+<h2>Képrendezés</h2>
+<p>Kérjük, hogy az alábbi képeket tegye úgy sorrendbe, hogy valóságos történetek kerekedjenek ki! A feladat megoldásához max. 3 perc áll rendelkezésére.</p>
+<ul>
+  <!--<li><a href="#" onclick="return false;" id="horgasz_link">Horgász</a></li-->
+  <li><a href="#" onclick="return false;" id="konzulatus_link">Konzulátus</a></li>
+</ul>
+<div id="ctest" style="display: none;">
+  <p>Idő: <span class="timer"></span></p>
+  <div id="ctest_sorting_box" class="sorting_box"></div>
+  <p><a href="#" onclick="return false;" class="done_link">Kész!</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+--- 
+created_at: 2007-06-12 23:27:00 +02:00
+layout: post
+tags: "remix07 MollyHolzschlag css ie7"
+title: "Beszélgetés Molly Holzschlaggal és egyéb REMIX 07 tapasztalatok"
+typo_id: 13
+---
+<a class="sideimage" href="http://farm2.static.flickr.com/1154/930474407_4c4ac2ff6c_b_d.jpg"><img src="http://farm2.static.flickr.com/1154/930474407_4c4ac2ff6c_m.jpg" alt="Én és Molly" /></a>
+
+A konferencia mai napját inkább a kapcsolatépítésnek szenteltem. Volt alkalmam egy hosszabb beszélgetésbe elegyedni [Molly Holzschlaggal](http://www.molly.com/about.php) a Szépművészeti Múzeum lépcsőin, és igazán érdekes dolgokat tudtam meg tőle (lásd a bejegyzés vége felé).
+
+Kezdjük azzal, hogy megemlítettem neki azt, amit hiányoltam a hétfői előadásából. Azóta már tudom, hogy az előadások nem engem céloztak meg, de ennek ellenére elmondtam neki, hogy én személy szerint mire számítottam. A reakciója az volt, amit vártam. Egy konferencián sajnos nem lehet mindenkit megcélozni. Ez a konferencia leginkább a termékekről szólt. Silverlight, Visual Studio 'Orcas', Expression Studio. A legtöbb előadás arról szólt, hogy ezeket hogyan tudnám a saját munkámban alkalmazni. Ezek mellett igazán jó választás volt a Microsoft részéről, hogy Mollyt is meghívta. Így szó eshetett CSS-ről is, na meg az IE7 standard támogatásáról is. Ami igazán elszomorító az az, hogy *Magyarországon a webdesignerek nagy része még mindig nincs képben CSS-sel kapcsolatban*. Ilyen adottságok mellett nem is lehetett volna jobban belemenni az előadás során a CSS rejtelmeibe. Molly elmondta, hogy még így is voltak, akik azzal jöttek hozzá, hogy az előadása túl haladó volt.
+
+A mai előadása számomra is sokkal érdekesebb volt. A téma az IE7 CSS és web standard támogatása volt. Igazából az ez iránt érdeklődők már valószínű ezekkel az információkkal is találkozhattak máskor. Számomra viszont érdekes volt, mert túlságosan még nem mélyedtem bele az új IE-be. Szó volt az új támogatott CSS3 kiválasztókról, alfa pngről és arról, hogy hogyan lehet visszafelé kompatibilis css kódot írni.
+
+Visszatérve a beszélgetésünkre, Molly mesélt nekem arról a munkáról is, amit a Microsoftnál végez. Személy szerint nagyon örülök annak, hogy az IE elindult egy jobb irányba. Persze ehhez még nagy utat kell megtenni, de hát melyik böngésző tökéletes, ugye? Válaszként arra, hogy újból öt évet kell-e várni a következő IE verzióig azt mondta, hogy ha rajta múlik, akkor ilyen nem fog újből előfordulni, akkor inkább leugrik egy felhőkarcolóról. A mai előadásán szintén elhangzott ez a kérdés és az IE fejlesztésért felelős ember, Pete LePage elmondta, hogy *12-18 hónapos release ciklusokat terveznek* béta verziókkal tűzdelve.
+
+Egy kicsit személyesebb területekre evezve kiderült, hogy Mollynak igazán megtetszett Budapest. Sajnos nem volt módja, hogy alaposabban megnézze, de azt mondta, hogy mindenféleképp visszajön majd. Nemrég Párizsban volt egy ideig, és állítása szerint Budapest sokkal szebb város. Sajnos nem tudom megcáfolni, vagy megerősíteni, mivel még nem volt alkamam megtekinteni Párizst. Ami viszont érdekesebb, hogy *Molly részben magyar származású*. Szülei már az Egyesült Államokban születtek, de apai ágon a nagyszülei magyarok, anyai ágon pedig lengyelek. Valószínű ezért is áll közelebb hozzá 'nyugat-közép európa'. Összességében Molly egy nagyon kedves személy, igazán örülök, hogy volt alkalmam megismerkedni vele személyesen is.
+
+A nap egyéb benyomásairól pár szóban. Igazán tetszett Paul Dawson utolsó előadása 'Killer Digital Reading Experiences' címmel. Nagyrészt arról szólt, hogy hogyan lehet az olvasói élményt az új technológiákkal javítani. [New York Times reader](http://firstlook.nytimes.com/index.php?cat=4#) és hasonlók. Igazán jól összerakott prezentáció volt. Más előadásokon nagyon nem voltam bent, ezért azokra nem reagálok. Az esemény után Benedekkel, hírbehozóval és Gazzsal aftertalkingot tartottunk.
+
+Konklúzió: a Microsofton látszik, hogy igazán igyekszik túllépni a hosszú évek során sokakban kialakult negatív képből. Sokáig én is úgy voltam vele, hogy ami Microsoft az rossz. Pont. Ebből az elvakult hozzáállásból viszont sikerült kinőni. Mostanában egyre több olyan Microsoft terméket látok, amit akár még használnék is. A Silverlight is ilyen, és biztos vagyok benne, hogy adok majd neki egy próbát, amint lesz IronRuby hozzá. Sok olyan felhasználási módot látok, ahol akár éles környezetben is használnám.

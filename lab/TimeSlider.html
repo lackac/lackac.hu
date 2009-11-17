@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>TimeSlider</title>
+
+  <style type="text/css" media="screen">
+  body {
+    background-color: #ffc;
+    padding: 15px;
+  }
+  #container {
+    position: relative;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: white;
+  }
+  #timetrack {
+    border: 1px solid #ccc;
+    height: 15px;
+    background-color: #ffc;
+  }
+  #timehandle {
+    width: 3px;
+    height: 15px;
+    background-color: black;
+    cursor: move;
+  }
+  #timejugtrack {
+    position: relative;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    width: 150px;
+    height: 6px;
+    background-color: #ffc;
+  }
+  #timejughandle {
+    position: absolute;
+    margin-top: -4px;
+    width: 3px;
+    height: 14px;
+    background-color: black;
+    cursor: move;
+  }
+  #timedebug {
+    margin-bottom: 1em;
+    font: 10pt Monaco, Courier, 'Courier New', Monospace;
+    white-space: pre;
+  }
+  </style>
+
+  <script src="/javascripts/prototype.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/scriptaculous.js?load=slider" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+  //<![CDATA[
+  /*
+   * Special Dates:
+   * Mon,  1 Jan   1 AD  --  -62135600400000
+   * Wed, 16 Jan  27 BC  --  -62986381200000  // the Roman Senate's granting to Octavian the honorific Augustus
+   * Fri,  4 Sep 476 AD  --  -47124640801000  // end of the reign of Romulus Augustus, the last Western Roman Emperor
+   */
+
+  Date.prototype.toHistoricalString = function() {
+    var y = this.getFullYear();
+    if (y < 1) y -= 1;
+    var ay = Math.abs(y);
+    return $w('Sun Mon Tue Wed Thu Fri Sat')[this.getDay()] + ', ' +
+      (this.getDate() < 10 ? ' ' : '') + this.getDate() + ' ' +
+      $w('Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec')[this.getMonth()] + ' ' +
+      (ay < 1000 ? ' '+(ay < 100 ? ' '+(ay < 10 ? ' ' : '') : '') : '') + ay + ' ' + (y > 0 ? 'AD' : 'BC') + ' ' +
+      (this.getHours() < 10 ? '0' : '') + this.getHours() + ':' +
+      (this.getMinutes() < 10 ? '0' : '') + this.getMinutes() + ':' +
+      (this.getSeconds() < 10 ? '0' : '') + this.getSeconds();
+  };
+
+  Control.Jug = Class.create();
+  Object.extend(Control.Jug.prototype, Control.Slider.prototype);
+  Object.extend(Control.Jug.prototype, {
+    __initialize: Control.Slider.prototype.initialize,
+    initialize: function(handle, track, options) {
+      this.__initialize(handle, track, options);
+      this.interval = this.options.interval || 100;
+      this.baseValue = this.options.baseValue || 0;
+      this.timer = false;
+    },
+    __startDrag: Control.Slider.prototype.startDrag,
+    startDrag: function(event) {
+      this.__startDrag(event);
+      if (this.active && this.options.onJug) {
+        this.options.onJug(this.values.length>1 ? this.values : this.value, this);
+        this.timer = setInterval(function () {
+          this.options.onJug(this.values.length>1 ? this.values : this.value, this);
+        }.bind(this), this.interval);
+      }
+    },
+    __endDrag: Control.Slider.prototype.endDrag,
+    endDrag: function(event) {
+      this.setValue(this.baseValue);
+      this.__endDrag(event);
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = false;
+      }
+    },  
+  });
+
+  var timeValue = -62135600400;
+  function updateValue(val) {
+    timeValue = val;
+    $('timedebug').update(new Date(val*1000).toHistoricalString());
+  }
+
+  var STEPS = [0, 1, 2, 5, 10, 30, 60, 120, 300, 600, 1800, 3600, 7200, 21600, 43200, 86400, 172800, 302400, 604800, 1209600];
+  function stepTime(val) {
+    var t = timeValue;
+    var d = new Date(t*1000);
+    var s = val == 0 ? 0 : (val > 0 ? 1 : -1);
+    switch (Math.abs(val)) {
+      case 20:
+        t = Math.floor(d.setMonth(d.getMonth()+s)/1000);
+        break;
+      case 21:
+        t = Math.floor(d.setMonth(d.getMonth()+3*s)/1000);
+        break;
+      case 22:
+        t = Math.floor(d.setFullYear(d.getFullYear()+s)/1000);
+        break;
+      case 23:
+        t = Math.floor(d.setFullYear(d.getFullYear()+s*10)/1000);
+        break;
+      case 24:
+        t = Math.floor(d.setFullYear(d.getFullYear()+s*100)/1000);
+        break;
+      default:
+        t += s*STEPS[Math.abs(val)];
+    }
+    TimeSlider.setValue(t);
+  }
+
+  var TimeSlider = null;
+  var TimeJug = null;
+  Event.observe(window, 'load', function () {
+    TimeSlider = new Control.Slider('timehandle', 'timetrack', {
+      range: $R(-62986381200, -47124640801),
+      onSlide: updateValue, onChange: updateValue
+    });
+    TimeSlider.setValue(timeValue);
+    TimeJug = new Control.Jug('timejughandle', 'timejugtrack', {
+      range: $R(-24, 24),
+      values: $A($R(-24, 24)),
+      onJug: stepTime,
+    });
+    TimeJug.setValue(0);
+  });
+  //]]>
+  </script>
+</head>
+
+<body>
+
+<div id="container">
+  
+  <div id="timedebug">0</div>
+  <div id="timetrack"><div id="timehandle"></div></div>
+
+  <div id="timejugtrack"><div id="timejughandle"></div></div>
+
+</div>
+
+</body>
+</html>

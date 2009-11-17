@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Auditálás - kakukktojás</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop,builder" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var ctest;
+  function initialize() {
+    ctest = new OddWordOut('ctest');
+  }
+  Event.observe(window, 'load', initialize);
+
+  OddWordOut = Class.create();
+  OddWordOut.steps = [
+    { solution: 1,
+      words: ['program', 'törlesztés', 'totál', 'optimista', 'katalógus']},
+    { solution: 4,
+      words: ['sál', 'kígyó', 'virsli', 'spagetti', 'rugó']},
+    { solution: 1,
+      words: ['deltatorkolat', 'diéta', 'fa', 'világegyetem', 'influenza']},
+    { solution: 1,
+      words: ['biciklipumpa', 'szagelszívó', 'hajszárító', 'légkondícionáló', 'ventilátor']},
+    { solution: 2,
+      words: ['varrógép', 'olvasólámpa', 'könyvespolc', 'utazótáska', 'kötőtű']},
+  ];
+  OddWordOut.prototype = {
+    initialize: function (div) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      this._start    = this.start.bindAsEventListener(this);
+      this._nextStep = this.nextStep.bindAsEventListener(this);
+      this._onClick  = this.onClick.bindAsEventListener(this);
+
+      if (!(this.start_link = this.div.getElementsByClassName('start_link')[0])) return false;
+      this.start_link.observe('click', this._start);
+
+      this.steps = [];
+      OddWordOut.steps.each(function (step) {
+        this.steps.push(this.createStep(step));
+        this.div.appendChild(this.steps[this.steps.length-1].element);
+      }.bind(this));
+
+      if (!(this.timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+
+      this.div.show();
+    },
+
+    start: function() {
+      this.step = 0;
+      this.steps[this.step].element.show();
+      this.timer = new Timer({update: this.timer_span, backwards: this.timeup.bind(this), from: 600});
+      this.start_link.stopObserving('click', this._start);
+      this.start_link.update('Tovább');
+      this.start_link.observe('click', this._nextStep);
+    },
+
+    createStep: function (data) {
+      var step = {};
+      step.solution = data.words[data.solution];
+      step.element = Builder.node('div', {className:'step'});
+      var ul = Builder.node('ul');
+      for (var i = 0; i < data.words.length; i++) {
+        var li = Builder.node('li', data.words[i]);
+        li.observe('click', this._onClick);
+        ul.appendChild(li);
+      }
+      step.element.appendChild(ul);
+      step.element.appendChild(Builder.node('br', {className: 'clear'}));
+      step.element.hide();
+      return step;
+    },
+
+    nextStep: function() {
+      this.step++;
+      if (this.step < this.steps.length) {
+        this.steps[this.step-1].element.hide();
+        this.steps[this.step].element.show();
+      }
+      else {
+        this.finish();
+      }
+    },
+
+    onClick: function(event) {
+      var step;
+      if (!(step = this.steps[this.step])) return false;
+      if (step.selected) {
+        step.selected.removeClassName('selected');
+      }
+      var li = Event.element(event);
+      li.addClassName('selected');
+      step.selected = li;
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      this.result = 0;
+      var i = 0;
+      this.steps.each(function (step) {
+        if (step.selected && step.selected.innerHTML == step.solution) {
+          this.result++;
+        }
+      }.bind(this));
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\nEredmény: '+this.result+'/'+this.steps.length+'\nIdő: '+this.timer.toString(true);
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Kakukktojás\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+    }
+  }
+  //]]>
+  </script>
+
+  <style type="text/css" media="screen">
+    ul {
+      list-style-type: none;
+      float: left;
+      margin: 0;
+      padding: 0;
+      background-color: #cc0099;
+    }
+    li {
+      margin: 0.5em;
+      border: 1px solid black;
+      padding: 0.5em;
+      background-color: #99ccff;
+      cursor: pointer;
+    }
+    li.selected {
+      background-color: #ffffcc;
+    }
+  </style>
+</head>
+
+<body>
+<h1>Auditálás</h1>
+<h2>Kakukktojás</h2>
+<div id="ctest" style="display: none;">
+  <p>Melyik nem illik a többi közé?</p>
+  <p><a href="#" onclick="return false;" class="start_link">Indít!</a></p>
+  <p>Idő: <span class="timer"></span></p>
+</div>
+</body>
+</html>

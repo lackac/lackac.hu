@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Koncentráció - figyelem, vigilancia</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop,builder" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+  <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+  <script src="javascripts/clock.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var ctest;
+  function initialize() {
+    ctest = new SecondJumps('ctest');
+  }
+  Event.observe(window, 'load', initialize);
+
+  SecondJumps = Class.create();
+  SecondJumps.prototype = {
+    initialize: function (div) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      if (!(this.canvas = this.div.getElementsByClassName('clock')[0])) return false;
+      this.clock = new Clock(this.canvas);
+
+      this.totaltime = 60;
+      this.totaljumps = 4;
+      this.tolerance = 20; // in tenth-of-seconds
+      this.diversion = null;
+      this.jumps = [];
+      for (var i = 0; i < this.totaljumps; i++) {
+        var jump;
+        do {
+          // leave tolerance at the beginning and double tolerance at the end
+          jump = Math.ceil(this.tolerance/10) + Math.floor(Math.random()*(this.totaltime-this.totaljumps-Math.ceil(this.tolerance/10)*3));
+        } while (this.jumps.any(function(v) {return Math.abs(v-jump)*10 <= this.tolerance+10;}.bind(this)));
+          // leave at least 1 second + tolerance gap between jumps
+        this.jumps.push(jump);
+      }
+      this.sec = 0;
+
+      this.parts = [];
+      this.reactTimes = [];
+      this.falseAlarms = 0;
+
+      this._startClock = this.startClock.bindAsEventListener(this);
+      if (!(this.start_link = this.div.getElementsByClassName('start_link')[0])) return false;
+      this.start_link.observe('click', this._startClock);
+
+      this._onMDown = this.onMDown.bindAsEventListener(this);
+      this._onMUp   = this.onMUp.bindAsEventListener(this);
+      this.canvas.observe('mousedown', this._onMDown);
+      this.canvas.observe('mouseup', this._onMUp);
+
+      this.div.show();
+    },
+
+    startClock: function() {
+      this.start_link.stopObserving('click', this._startClock);
+      this.timer = new PeriodicalExecuter(this.tick.bind(this), 1);
+      this.reactionTimer = false;
+      this.clicked = false;
+    },
+
+    tick: function() {
+      this.sec++;
+      if (this.jumps.include(this.sec)) {
+        this.clock.tickTick();
+        this.reactTSec = 0;
+        this.reactionTimer = setInterval(this.tickReact.bind(this), 100);
+      }
+      else {
+        this.clock.tick();
+      }
+      console.log(this.sec, (this.totaltime-this.totaljumps), (this.totaltime-this.totaljumps)/3, Math.ceil((this.totaltime-this.totaljumps)/3), this.sec % Math.ceil((this.totaltime-this.totaljumps)/3));
+      if (this.sec % Math.ceil((this.totaltime-this.totaljumps)/3) == 0) {
+        this.parts.push({
+          reactTimes: this.reactTimes,
+          falseAlarms: this.falseAlarms
+        });
+        this.reactTimes = [];
+        this.falseAlarms = 0;
+      }
+      if (this.sec == this.totaltime-this.totaljumps) {
+        this.finish();
+      }
+      if (this.diversion) {
+        this.deactivateDiversion();
+      }
+      else if (Math.random() < ((this.totaljumps*3) / this.totaltime)) {
+        this.activateDiversion();
+      }
+    },
+
+    tickReact: function() {
+      this.reactTSec++;
+      if (this.clicked) {
+        this.reactTimes.push(this.reactTSec);
+        clearInterval(this.reactionTimer);
+        this.reactionTimer = false;
+        this.clicked = false;
+      }
+      else if (this.reactTSec == this.tolerance) {
+        this.reactTimes.push(false);
+        clearInterval(this.reactionTimer);
+        this.reactionTimer = false;
+      }
+    },
+
+    activateDiversion: function() {
+      this.diversion = Builder.node('div', {style:'position: absolute; top:0; left:0;'});
+      var imgnum = Math.floor(Math.random()*4);
+      var img = Builder.node('img', {src:'images/garfield'+imgnum+'.gif', alt:'diversion', width:'100', height:'100'});
+      this.diversion.appendChild(img);
+      document.body.appendChild(this.diversion);
+      var cnvPos = Position.cumulativeOffset(this.canvas);
+      var cnvDim = this.canvas.getDimensions();
+      var divDim = this.diversion.getDimensions();
+      var vp = getViewport();
+      var overlap = true;
+      while (overlap) {
+        var left = Math.floor(Math.random()*(vp.width  - divDim.width));
+        var top  = Math.floor(Math.random()*(vp.height - divDim.height));
+        this.diversion.style.left = left + "px";
+        this.diversion.style.top  = top  + "px";
+        var divPos = Position.cumulativeOffset(this.diversion);
+        overlap = (divPos[0] > cnvPos[0]-divDim.width  && divPos[0] < cnvPos[0]+cnvDim.width) && 
+                  (divPos[1] > cnvPos[1]-divDim.height && divPos[1] < cnvPos[1]+cnvDim.height);
+      }
+    },
+
+    deactivateDiversion: function() {
+      if (this.diversion) {
+        this.diversion.remove();
+        this.diversion = null;
+      }
+    },
+
+    onMDown: function() {
+      if (this.reactionTimer) {
+        this.clicked = true;
+        this.clock.setFeedback(true);
+      }
+      else {
+        this.falseAlarms++;
+        this.clock.setFeedback(false);
+      }
+    },
+
+    onMUp: function() {
+      this.clock.clearFeedback();
+    },
+
+    finish: function() {
+      this.timer.stop();
+      this.parts.push({
+        reactTimes: this.reactTimes,
+        falseAlarms: this.falseAlarms
+      });
+      var partstats = [];
+      var total = {sum:0, count:0, found:0, falseAlarms:0};
+      for (var i = 0; i < this.parts.length; i++) {
+        var stats = this.parts[i].reactTimes.inject({sum:0, count:0, found:0}, function(acc, v) {
+          acc.count++;
+          if (v) {
+            acc.sum += v/10;
+            acc.found++;
+            return acc;
+          }
+          else {
+            return acc;
+          }
+        });
+        var avarage = Math.floor(stats.sum/stats.count*10)/10;
+        if (avarage != 0) {
+          total.sum += avarage;
+          total.count++;
+        }
+        total.found += stats.found;
+        total.falseAlarms += this.parts[i].falseAlarms;
+        partstats[i] = {
+          avarage: avarage,
+          found: stats.found,
+          falseAlarms: this.parts[i].falseAlarms
+        }
+      }
+      var stats = "";
+      var avarage = Math.floor(total.sum/total.count*10)/10;
+      stats += 'egész - átlag:'+avarage+', talált:'+total.found+', téves:'+total.falseAlarms+'\n';
+      for (var i = 0; i < partstats.length; i++) {
+        stats += (i+1)+'. rész - átlag:'+partstats[i].avarage+', talált:'+partstats[i].found+', téves:'+partstats[i].falseAlarms+'\n';
+      }
+      var result = 'Teszt vége.\nStatisztika:\n'+stats+'Téves riasztások száma: '+this.falseAlarms;
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Figyelem - vigilancia\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+      if (this.reactionTimer) {
+        clearInterval(this.reactionTimer);
+      }
+    }
+  }
+  //]]>
+  </script>
+</head>
+
+<body>
+<h1>Koncentráció</h1>
+<h2>Figyelem - vigilancia</h2>
+<div id="ctest" style="display: none;">
+  <p>Kérem, most figyelje az órát és, ha a mutatója nem megfelelő ritmusban ugrik, jelezze a bal gomb kattintással az óra felületén.</p>
+  <p><a href="#" onclick="return false;" id="ctest_start_link" class="start_link">Indít!</a></p>
+  <canvas id="ctest_clock" class="clock"></canvas>
+</div>
+</body>
+</html>

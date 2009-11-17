@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>overlay.js</title>
+
+  <link rel="stylesheet" href="css/defaults.css" type="text/css"/>
+  <link rel="stylesheet" href="css/blackboard.css" type="text/css"/>
+</head>
+
+<body>
+
+<div id="container">
+<pre class="blackboard"><span class="Storage">var</span> tardis <span class="Keyword">=</span> {
+  <span class="Entity">onLoad</span>: <span class="Storage">function</span>() {
+    <span class="Comment"><span class="Comment">//</span> initialization code</span>
+    <span class="Variable">this</span>.initialized <span class="Keyword">=</span> <span class="Constant">true</span>;
+    <span class="Variable">this</span>.strings <span class="Keyword">=</span> <span class="Support">document</span>.<span class="Support">getElementById</span>(<span class="String"><span class="String">&quot;</span>tardis-strings<span class="String">&quot;</span></span>);
+  },
+  <span class="Entity">onMenuItemCommand</span>: <span class="Storage">function</span>(<span class="Variable">e</span>) {
+    <span class="Storage">var</span> pSvc <span class="Keyword">=</span> Components
+      .<span class="Support">classes</span>[<span class="String"><span class="String">&quot;</span>@mozilla.org/embedcomp/prompt-service;1<span class="String">&quot;</span></span>]
+      .getService(Components.interfaces.nsIPromptService);
+    pSvc.<span class="Support">alert</span>(<span class="Support">window</span>, <span class="Variable">this</span>.strings.getString(<span class="String"><span class="String">&quot;</span>whoMessageTitle<span class="String">&quot;</span></span>),
+                       <span class="Variable">this</span>.strings.getString(<span class="String"><span class="String">&quot;</span>whoMessage<span class="String">&quot;</span></span>));
+  },
+};
+<span class="Support">window</span>.addEventListener(<span class="String"><span class="String">&quot;</span>load<span class="String">&quot;</span></span>, <span class="Storage">function</span>(e) {
+  tardis.<span class="Support">onLoad</span>(e);
+}, <span class="Constant">false</span>);
+</pre>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Rendszerszemlélet - útvonaltervezés</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop,builder" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var ctest;
+  function initialize() {
+    ctest = new RoadPlanning('ctest');
+  }
+  Event.observe(window, 'load', initialize);
+
+  RoadPlanning = Class.create();
+  RoadPlanning.prototype = {
+    initialize: function (div) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      if (!(this.map = this.div.getElementsByClassName('map')[0])) return false;
+      //this.map.observe('click', this.onImageClick.bindAsEventListener(this));
+      if (!(this.road_list = this.div.getElementsByClassName('road_list')[0])) return false;
+      this.roadId = 0;
+      this.delCount = 0;
+      this.orderCount = 0;
+
+      this._onAreaClick = this.onAreaClick.bindAsEventListener(this);
+      this.areas = $A(this.div.getElementsByTagName('area'));
+
+      this._start = this.start.bindAsEventListener(this);
+      if (!(this.start_link = this.div.getElementsByClassName('start_link')[0])) return false;
+      this.start_link.observe('click', this._start);
+      this._finish = this.finish.bindAsEventListener(this);
+      if (!(this.done_link = this.div.getElementsByClassName('done_link')[0])) return false;
+      if (!(this.timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+
+      this.div.show();
+    },
+
+    start: function() {
+      this.timer = new Timer({update: this.timer_span, backwards: this.timeup.bind(this), from: 300});
+      this.areas.each(function (area) {
+        area.observe('click', this._onAreaClick);
+      }.bind(this));
+      this.start_link.stopObserving('click', this._start);
+      this.done_link.observe('click', this._finish);
+    },
+
+    onAreaClick: function(event) {
+      var area = Event.element(event);
+      var road = Builder.node('div', {className: 'road', id: 'road_'+this.roadId++});
+      var name = Builder.node('span', {className: 'road_name'}, area.readAttribute('alt'));
+      var link = Builder.node('a', {href:'#',onclick:'return false;'}, '–');
+      road.appendChild(name);
+      road.appendChild(link);
+      link.observe('click', function() {
+        road.parentNode.removeChild(road);
+        this.delCount++;
+      }.bind(this));
+      this.road_list.appendChild(road);
+      Sortable.create(this.road_list, {tag: 'div', handle: 'road_name', onUpdate: function () {this.orderCount++;}.bind(this)});
+    },
+
+    //onImageClick: function(event) {
+    //  var pos = Position.cumulativeOffset(Event.element(event));
+    //  pos = [Event.pointerX(event)-pos[0], Event.pointerY(event)-pos[1]];
+    //  var temp = $('temp');
+    //  temp.update(temp.innerHTML.replace('%C', '%C,'+pos[0]+','+pos[1]));
+    //},
+
+    arrayDistance: function(a, b) {
+      var m = a.length;
+      var n = b.length;
+      var d = [];
+      var i,j;
+      for (i = 0; i <= m; i++) {
+        d[i] = [i];
+      }
+      for (j = 1; j <= n; j++) {
+        d[0][j] = j;
+      }
+      for (i = 1; i <= m; i++) {
+        for (j = 1; j <= n; j++) {
+          var cost = a[i] == b[j] ? 0 : 1;
+          d[i][j] = [
+            d[i-1][j]+1,     // deletion
+            d[i][j-1]+1,     // insertion
+            d[i-1][j-1]+cost // substitution
+          ].min();
+          if (i > 1 && j > 1 && a[i] == b[j-1] && a[i-1] == b[j]) {
+            d[i][j] = [
+              d[i][j],
+              d[i-2][j-2]+cost // transposition
+            ].min();
+          }
+        }
+      }
+      return d[m][n];
+    },
+
+    check: function() {
+      this.solution = ['Rét u.', 'Templom u.', 'Vízpart utca', 'Nap u.', 'Rózsa u.', 'Arany János utca', 'Csendes u.', 'Galamb u.'];
+      this.result = [];
+      $A(this.road_list.getElementsByTagName('span')).each(function (span) {
+        this.result.push(span.innerHTML);
+      }.bind(this));
+      return this.arrayDistance(this.solution, this.result);
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      var result = this.check();
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\nA megoldás '+(result == 0 ? 'helyes' : 'hibás')+'.\nDamerau-Levenshtein távolság: '+result+'\nTörlések száma: '+this.delCount+'\nRendezések száma: '+this.orderCount+'\nIdő: '+this.timer.toString(true);
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Útvonaltervezés\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+      this.done_link.stopObserving('click', this._finish);
+    }
+  }
+
+  //var template = '<area shape="poly" coords="%C" href="#" alt="%A" />';
+  //function newPoly() {
+  //  var temp = $('temp');
+  //  $('polylist').innerHTML += temp.innerHTML.replace('%C,', '')+"\n";
+  //  var alt = prompt('alt attribute?');
+  //  $('temp').update(template.replace('%A', alt).escapeHTML());
+  //}
+
+  //]]>
+  </script>
+
+  <style type="text/css" media="screen">
+    .map {
+      margin: 0 1em;
+      float: right;
+      border: 0;
+    }
+    .road_list {
+      position: relative;
+      margin: 0.5em;
+      border: 1px solid black;
+      padding: 0.25em;
+      width: 150px;
+    }
+    .road {
+      position: relative;
+      width: 100%;
+    }
+    .road span {
+      cursor: default;
+    }
+    .road a {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    /* code {
+      display: block;
+      margin: 5px;
+      border: 1px solid black;
+      font-size: 0.8em;
+      white-space: pre;
+    } */
+  </style>
+</head>
+
+<body>
+<h1>Rendszerszemlélet</h1>
+<h2>útvonaltervezés</h2>
+<div id="ctest" style="display: none;">
+  <p>Tervezze meg, hogy autóval hogyan jutna el az alábbi szövegben megjelölt kezdőpontból a célba. Sorolja fel helyes sorrendben (kezdőponttól kezdve) azon utcák neveit, melyeken legalább egy saroknyit az út során haladnia kell.</p>
+  <img id="ctest_map" class="map" src="images/map.gif" usemap="#roadmap" />
+  <ul>
+    <li>Az Ó és a Rét utca kereszteződéséből indul.</li>
+    <li>A Gerzsony és a Galamb utca sarkára akar eljutni.</li>
+    <li>A Mustár utcában házfelújítási munkálatok miatt csak Dél felé haladhatnak a járművek</li>
+    <li>Rét utca Nyugatra, a Mandula utca pedig Délre egyirányú (Dél felé lehet haladni)</li>
+    <li>A Nyár utcát a Gyöngy utcától a Galamb utcáig tartó szakaszán csőtörés miatt lezárták.</li>
+    <li>A Deák utca teljes szélességében le van zárva a Diófa utcától a Bánk utcáig felújítási munkálatok miatt.</li>
+    <li>Útburkolatot javítanak a Zsoldos és a Diófa utca 100m méteres szakaszán, a javítási munkálatok alatt ezek az utcák zsákutcák.</li>
+    <li>Az Arany János utcából (Dél-keleti irányba haladva) csak a Csendes és Nyár utcákba engedélyezett a balra kanyarodás.</li>
+    <li>A Gyékény utca Dél-nyugatra egyirányú.</li>
+  </ul>  
+  <p><a href="#" onclick="return false;" class="start_link">Indít!</a></p>
+  <p>Idő: <span class="timer"></span></p>
+  <!--<code id="polylist"></code>
+  <code id="temp"></code>-->
+  <div id="ctest_road_list" class="road_list"></div>
+  <map id="roadmap" name="roadmap">
+    <area shape="poly" href="#" onclick="return false;" alt="Deák utca" coords="389,1,363,109,321,206,268,277,47,438,1,437,232,272,287,210,336,108,361,2" />
+    <area shape="poly" href="#" onclick="return false;" alt="Bánk u." coords="332,113,292,94,296,81,336,101" />
+    <area shape="poly" href="#" onclick="return false;" alt="Ó u." coords="286,84,237,2,252,2,297,79" />
+    <area shape="poly" href="#" onclick="return false;" alt="Rét u." coords="269,59,216,98,211,86,262,47" />
+    <area shape="poly" href="#" onclick="return false;" alt="Síp u." coords="292,97,250,129,242,121,284,84" />
+    <area shape="poly" href="#" onclick="return false;" alt="Sürgöny u." coords="252,202,240,192,226,137,207,119,141,2,167,2,215,97,248,128,267,194" />
+    <area shape="poly" href="#" onclick="return false;" alt="Templom u." coords="103,190,90,172,131,143,151,138,201,106,208,116" />
+    <area shape="poly" href="#" onclick="return false;" alt="Diófa u." coords="208,219,199,229,146,160,158,152" />
+    <area shape="poly" href="#" onclick="return false;" alt="Sebők u." coords="252,210,180,278,167,260,239,195" />
+    <area shape="poly" href="#" onclick="return false;" alt="Vízpart utca" coords="196,298,180,310,2,104,3,75" />
+    <area shape="poly" href="#" onclick="return false;" alt="Vízpart utca" coords="198,335,218,360,238,373,288,397,302,413,298,374,240,348,218,322" />
+    <area shape="poly" href="#" onclick="return false;" alt="Sólyom u." coords="391,1,390,7,649,137,649,123,411,3" />
+    <area shape="poly" href="#" onclick="return false;" alt="Galamb u." coords="362,115,649,295,649,281,367,101" />
+    <area shape="poly" href="#" onclick="return false;" alt="Mustár u." coords="387,250,447,34,435,28,376,239" />
+    <area shape="poly" href="#" onclick="return false;" alt="Csendes u." coords="543,5,435,294,424,285,532,2" />
+    <area shape="poly" href="#" onclick="return false;" alt="Mandula u." coords="595,34,483,339,473,329,584,27" />
+    <area shape="poly" href="#" onclick="return false;" alt="Nyár u." coords="648,59,531,383,521,373,639,58" />
+    <area shape="poly" href="#" onclick="return false;" alt="Gerzsony u." coords="565,415,648,220,648,188,553,404" />
+    <area shape="poly" href="#" onclick="return false;" alt="Arany János utca" coords="590,438,558,439,316,216,328,197" />
+    <area shape="poly" href="#" onclick="return false;" alt="Rózsa u." coords="370,267,312,330,307,314,360,258" />
+    <area shape="poly" href="#" onclick="return false;" alt="Gyékény u." coords="422,315,325,385,322,369,411,305" />
+    <area shape="poly" href="#" onclick="return false;" alt="Zsoldos u." coords="359,439,482,371,471,360,338,437" />
+    <area shape="poly" href="#" onclick="return false;" alt="Ferenczi utca" coords="262,287,277,303,286,331,308,436,337,435,309,323,294,291,277,269" />
+    <area shape="poly" href="#" onclick="return false;" alt="Nap u." coords="287,330,252,357,235,343,278,309" />
+  </map>
+  <!--<a href="#" onclick="newPoly(); return false;">new poly</a>-->
+  <a href="#" onclick="return false;" id="ctest_done_link" class="done_link">Kész!</a>
+</div>
+</body>
+</html>

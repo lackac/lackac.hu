@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Auditálás - hiányzó ábra</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" />
+
+  <script src="javascripts/prototype.js" type="text/javascript"></script>
+  <script src="javascripts/scriptaculous.js?load=effects,dragdrop,builder" type="text/javascript"></script>
+  <script src="javascripts/application.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  //<![CDATA[
+  var ctest;
+  function initialize() {
+    ctest = new MissingPicture('ctest');
+  }
+  Event.observe(window, 'load', initialize);
+
+  MissingPicture = Class.create();
+  MissingPicture.image_path = 'images/missing_picture/';
+  MissingPicture.steps = [
+    { question: [0, 3],
+      solution: [0, 2],
+      puzzle: [['trinc_1.gif', 'trinc_2.gif', 'trinc_3.gif', 'trinc__.gif']],
+      suggestions: [['trinc_s1.gif', 'trinc_s2.gif', 'trinc_s3.gif', 'trinc_s4.gif']],
+      arrangement: 'rows' },
+    { question: [2, 2],
+      solution: [2, 0],
+      puzzle: [['tr_1.gif', 'tr_2.gif', 'tr_3.gif'],
+               ['tr_4.gif', 'tr_5.gif', 'tr_6.gif'],
+               ['tr_7.gif', 'tr_8.gif', 'tr__.gif']],
+      suggestions: [['tr_s1.gif', 'tr_s2.gif'],
+                    ['tr_s3.gif', 'tr_s4.gif'],
+                    ['tr_s5.gif', 'tr_s6.gif']],
+      arrangement: 'columns' },
+    { question: [2, 1],
+      solution: [2, 1],
+      puzzle: [['mine_1.gif', 'mine_2.gif', 'mine_3.gif'],
+               ['mine_4.gif', 'mine_5.gif', 'mine_6.gif'],
+               ['mine_7.gif', 'mine__.gif', 'mine_8.gif']],
+      suggestions: [['mine_s1.gif', 'mine_s2.gif'],
+                    ['mine_s3.gif', 'mine_s4.gif'],
+                    ['mine_s5.gif', 'mine_s6.gif']],
+      arrangement: 'columns' },
+    { question: [2, 1],
+      solution: [1, 1],
+      puzzle: [['circles_1.gif', 'circles_2.gif', 'circles_3.gif'],
+               ['circles_4.gif', 'circles_5.gif', 'circles_6.gif'],
+               ['circles_7.gif', 'circles__.gif', 'circles_8.gif']],
+      suggestions: [['circles_s1.gif', 'circles_s2.gif'],
+                    ['circles_s3.gif', 'circles_s4.gif'],
+                    ['circles_s5.gif', 'circles_s6.gif']],
+      arrangement: 'columns' },
+    { question: [2, 1],
+      solution: [0, 0],
+      puzzle: [['bar_1.gif', 'bar_2.gif', 'bar_3.gif'],
+               ['bar_2.gif', 'bar_1.gif', 'bar_6.gif'],
+               ['bar_3.gif', 'bar__.gif', 'bar_8.gif']],
+      suggestions: [['bar_3.gif', 'bar_2.gif'],
+                    ['bar_6.gif', 'bar_s4.gif'],
+                    ['bar_8.gif', 'bar_s6.gif']],
+      arrangement: 'columns' },
+  ]
+  MissingPicture.prototype = {
+    initialize: function (div) {
+      this.div = $(div);
+      if (!this.div) return false;
+      if (this.div.ctester) {
+        this.div.ctester.destroy();
+      }
+      this.div.ctester = this;
+
+      this._start    = this.start.bindAsEventListener(this);
+      this._nextStep = this.nextStep.bindAsEventListener(this);
+      this._onClick  = this.onClick.bindAsEventListener(this);
+
+      if (!(this.start_link = this.div.getElementsByClassName('start_link')[0])) return false;
+      this.start_link.observe('click', this._start);
+
+      this.steps = [];
+      MissingPicture.steps.each(function (step) {
+        this.steps.push(this.createStep(step));
+        this.div.appendChild(this.steps[this.steps.length-1].element);
+      }.bind(this));
+
+      if (!(this.timer_span = this.div.getElementsByClassName('timer')[0])) return false;
+
+      this.div.show();
+    },
+
+    start: function() {
+      this.step = 0;
+      this.steps[this.step].element.show();
+      this.timer = new Timer({update: this.timer_span, backwards: this.timeup.bind(this), from: 600});
+      this.start_link.stopObserving('click', this._start);
+      this.start_link.update('Tovább');
+      this.start_link.observe('click', this._nextStep);
+    },
+
+    createStep: function (data) {
+      var step = {};
+      step.element = Builder.node('div', {className:'step'});
+      var table = Builder.node('table', {cellpadding:'0',cellspacing:'0',border:'0',className:'puzzle '+data.arrangement});
+      var tbody = Builder.node('tbody');
+      for (var i = 0; i < data.puzzle.length; i++) {
+        var tr = Builder.node('tr');
+        for (var j = 0; j < data.puzzle[i].length; j++) {
+          var td = Builder.node('td');
+          var img = Builder.node('img', {src:MissingPicture.image_path+data.puzzle[i][j]});
+          if (i == data.question[0] && j == data.question[1]) {
+            step.question = img;
+          }
+          td.appendChild(img);
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+      step.element.appendChild(table);
+      var table = Builder.node('table', {cellpadding:'0',cellspacing:'0',border:'0',className:'suggestions '+data.arrangement});
+      var tbody = Builder.node('tbody');
+      var n = 0;
+      for (var i = 0; i < data.suggestions.length; i++) {
+        var tr = Builder.node('tr');
+        for (var j = 0; j < data.suggestions[i].length; j++) {
+          var td = Builder.node('td');
+          var num = Builder.node('span', {className:'num'}, ++n+'.');
+          td.appendChild(num);
+          var img = Builder.node('img', {src:MissingPicture.image_path+data.suggestions[i][j]});
+          img.observe('click', this._onClick);
+          if (i == data.solution[0] && j == data.solution[1]) {
+            step.solution = img;
+          }
+          td.appendChild(img);
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+      step.element.appendChild(table);
+      step.element.appendChild(Builder.node('br', {class:'clear'}));
+      step.element.hide();
+      return step;
+    },
+
+    nextStep: function() {
+      this.step++;
+      if (this.step < this.steps.length) {
+        this.steps[this.step-1].element.hide();
+        this.steps[this.step].element.show();
+      }
+      else {
+        this.finish();
+      }
+    },
+
+    onClick: function(event) {
+      var img = Event.element(event);
+      this.steps[this.step].question.src = img.src;
+    },
+
+    timeup: function() {
+      this.finish(true);
+    },
+
+    finish: function(timeup) {
+      this.timer.stop();
+      this.result = 0;
+      var i = 0;
+      this.steps.each(function (step) {
+        if (step.question.src == step.solution.src) {
+          this.result++;
+        }
+      }.bind(this));
+      var result = (timeup ? 'Az idő lejárt.' : 'Kész.')+'\nEredmény: '+this.result+'/'+this.steps.length+'\nIdő: '+this.timer.toString(true);
+      alert(result);
+      new Ajax.Request('store.php', {parameters: {result: 'Hiányzó ábrák\n'+result}});
+    },
+
+    destroy: function() {
+      this.timer.stop();
+    }
+  }
+  //]]>
+  </script>
+
+  <style type="text/css" media="screen">
+    table {
+      margin: 0;
+    }
+    table.puzzle {
+      background-color: #cc0099;
+    }
+    table.suggestions {
+      background-color: #99ccff;
+    }
+    table.columns {
+      float: left;
+    }
+    td {
+      padding: 10px 5px;
+    }
+    td span.num {
+      position: absolute;
+      font-weight: bold;
+    }
+    td img {
+      margin: 0 1em;
+    }
+  </style>
+</head>
+
+<body>
+<h1>Auditálás</h1>
+<h2>Hiányzó ábra</h2>
+<div id="ctest" style="display: none;">
+  <p>Melyik a hiányzó ábra? Melyik ábra illik a sorba?</p>
+  <p><a href="#" onclick="return false;" class="start_link">Indít!</a></p>
+  <p>Idő: <span class="timer"></span></p>
+</div>
+</body>
+</html>
