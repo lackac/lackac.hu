@@ -58,7 +58,7 @@ ul.skillset .active {
 }
 
 .highlight {
-  margin: 1em;
+  margin: 1em 0;
   border: 1px solid #ccc;
   background-color: #ffe;
 }
