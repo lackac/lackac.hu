@@ -1,0 +1,39 @@
+---
+layout:    nil
+title:     lackac.hu Atom Feed
+subtitle:  "egy magyar Ruby és Javascript fejlesztő élete és munkássága"
+site:      lackac.hu
+author:    László Bácsi
+email:     lackac@lackac.hu
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ page.title }}</title>
+  <subtitle>{{ page.subtitle }}</subtitle>
+  <link href="http://{{ page.site }}" rel="self" type="application/atom+xml" />
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ page.author }}</name>
+    <uri>http://{{ page.site }}</uri>
+    <email>{{ page.email }}</email>
+  </author>
+  <id>http://{{ page.site }}</id>
+  {% for post in site.posts limit:15 %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ post.url }}"/>
+    <id>tag:{{ page.site }},{{ post.created_at | date_to_xmlschema }}</id>
+    <updated>{% if post.updated_at %}{{ post.updated_at | date_to_xmlschema }}{% else %}{{ post.created_at | date_to_xmlschema }}{% endif %}</updated>
+    <author>
+      <name>{{ page.author }}</name>
+      <uri>http://{{ page.site }}</uri>
+      <email>{{ page.email }}</email>
+    </author>
+    <content type="html">
+      <![CDATA[
+      {{ post.content }}
+      ]]>
+    </content>
+  </entry>
+  {% endfor %}
+</feed>
