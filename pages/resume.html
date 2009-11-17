@@ -3,361 +3,363 @@ layout: default
 title: Önéletrajz
 typo_id: 2
 ---
-<!-- begin of CVs -->  <script type="text/javascript">
+<script type="text/javascript">
 //<![CDATA[
-function resumeSetup () {
-  var langs = $H({ en: 'English', hu: 'Magyar' });
-  var keys = langs.keys();
-  var lang = location.hash.substring(1,3);
-  lang = keys.indexOf(lang) != -1 ? lang : keys[0];
-  var hidden = keys.indexOf(lang)+1;
-  hidden = keys[hidden == keys.length ? 0 : hidden];
-  $('resume_'+hidden).hide();
-  for (var i = 0; i < keys.length; i++) {
-  var l = keys[i];
-  $('resume_'+l+'_link').observe('click', function() {
-    var clicked = this.id.match(/_(\w+)_/)[1];
-    keys.each(function(lang) {
-    if (clicked == lang) 
-      $('resume_'+lang).show();
-    else
-      $('resume_'+lang).hide();
-    });
-    location.hash = '#' + clicked;
+$(function() {
+  var hidden = location.hash.substring(1,3) == "hu" ? "en" : "hu";
+  $('#resume_'+hidden).hide();
+  $('.resume-lang').click(function(e) {
+    var clicked = $(this).attr('href');
+    if (clicked == "#hu") {
+      $('#resume_en').hide();
+      $('#resume_hu').show();
+    } else {
+      $('#resume_hu').hide();
+      $('#resume_en').show();
+    }
   });
-  }
-}
-Event.observe(window, 'load', resumeSetup);
+});
 //]]>
-</script> <!-- English cv -->
-<div id="resume_en" class="hresume"><a class="resume-lang" href="#hu" onclick="return false;" id="resume_hu_link">magyar</a>
-<div class="contact vcard">
-<h2 class="fn n name"><a class="url" name="en" href="http://lackac.hu/resume#en" rel="me">     <span class="given-name">László</span> <span class="family-name">Bácsi</span>   </a></h2>
-<address class="adr"><span class="locality">Budapest</span>, <span class="country-name">Hungary</span></address>
-<div class="phone"><span class="tel"><span class="value">+36 (30) 678-3791</span> (<span class="type">cell</span>)</span></div>
-<div class="online_info">Email: <a class="email" href="mailto:laszlo@bacsi.name">laszlo@bacsi.name</a> <br />
-Web: <a class="url" href="http://lackac.hu">http://lackac.hu</a>, <a class="url" href="http://icanscale.com/">http://icanscale.com</a>, <a href="http://www.linkedin.com/profile?viewProfile=&key=28338595&locale=en_US&trk=tab_pro">LinkedIn</a>
-</div>
-</div>
-<hr />
-<h3>Profile</h3>
-<p class="summary">Involved in web development since 2001. Passionate about new technologies, and using these tools in an agile manner to create usable and innovative web applications.</p>
-<h3>Professional Experience</h3>
-<ul class="history vcalendar">
-  <li class="experience vevent vcard">
-  <h4 class="org summary">Freelancer</h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2009-06-01">June 2009</abbr> - <abbr class="dtend">Present</abbr></div>
-  <p class="description">Working on projects with Ruby and Javascript for clients all over the world.</p>
-  <ul class="achievements">
+</script>
+
+<!-- begin of CVs -->
+<!-- English cv -->
+<div id="resume_en" class="hresume">
+  <a class="resume-lang" href="#hu" id="resume_hu_link">magyar</a>
+  <div class="contact vcard">
+    <h2 class="fn n name">
+      <a class="url" name="en" href="http://lackac.hu/resume#en" rel="me"><span class="given-name">László</span> <span class="family-name">Bácsi</span></a>
+    </h2>
+    <address class="adr"><span class="locality">Budapest</span>, <span class="country-name">Hungary</span></address>
+    <div class="phone"><span class="tel"><span class="value">+36 (30) 678-3791</span> (<span class="type">cell</span>)</span></div>
+    <div class="online_info">
+      Email: <a class="email" href="mailto:laszlo@bacsi.name">laszlo@bacsi.name</a><br/>
+      Web: <a class="url" href="http://lackac.hu">http://lackac.hu</a>, <a class="url" href="http://icanscale.com/">http://icanscale.com</a>, <a href="http://www.linkedin.com/profile?viewProfile=&key=28338595&locale=en_US&trk=tab_pro">LinkedIn</a>
+    </div>
+  </div>
+  <hr />
+  <h3>Profile</h3>
+  <p class="summary">Involved in web development since 2001. Passionate about new technologies, and using these tools in an agile manner to create usable and innovative web applications.</p>
+  <h3>Professional Experience</h3>
+  <ul class="history vcalendar">
+    <li class="experience vevent vcard">
+    <h4 class="org summary">Freelancer</h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2009-06-01">June 2009</abbr> - <abbr class="dtend">Present</abbr></div>
+    <p class="description">Working on projects with Ruby and Javascript for clients all over the world.</p>
+    <ul class="achievements">
+      <li><a href="http://github.com/lackac">Open Source contributions</a></li>
+      <li><a href="https://www.epointsystem.org/trac/epoint_wallet/wiki/FirePay">FirePay</a> (FireFox extension for the ePoint System micropayment solution)</li>
+      <li><a href="http://iwiw.hu/app/1934653002">Dealmakerz</a> (an OpenSocial app for <a href="http://iwiw.hu/">iWiW</a>)</li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://virgosystems.hu/">Virgo Systems Kft.</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2008-06-02">June 2008</abbr> - <abbr class="dtend" title="2009-05-29">May 2009</abbr></div>
+    <h5 class="title">Technology Expert</h5>
+    <p class="description">Leading Ruby based project development. Organizing and leading Ruby trainings inside the company.</p>
+    <ul class="achievements">
+      <li><a href="http://zanzaa.at/">Zanzaa</a> (Austrian start page)</li>
+      <li><a href="http://iwiw.hu/app/946304631">Zöldségeim</a> (an OpenSocial app for <a href="http://iwiw.hu/">iWiW</a>)</li>
+      <li><a href="http://futrinka.hu/">Futrinka</a> (social network for sharing memories)</li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://woa.hu">Woa! Kft.</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2008-01-06">January 2008</abbr> - <abbr class="dtend" title="2008-05-30">May 2008</abbr></div>
+    <h5 class="title">Developer</h5>
+    <p class="description">Worked on several Ruby on Rails projects in small teams.</p>
+    <ul class="achievements">
+      <li><a href="http://www.dooringatlan.hu/">Door Ingatlan</a></li>
+      <li><a href="http://www.vinobilia.com/">Vinobilia</a></li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://kitchenbudapest.hu/en">Kitchen Budapest</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2007-05-20">May 2007</abbr> - <abbr class="dtend" title="2008-01-26">January 2008</abbr></div>
+    <h5 class="title">Researcher</h5>
+    <p class="description">Worked in various projects doing mainly software development and project management.</p>
+    <ul class="achievements">
+      <li><a href="http://kitchenbudapest.hu/en/node/228">CityScout</a></li>
+      <li><a href="http://kitchenbudapest.hu/en/projects/multitouchwall">Multitouch Wall</a></li>
+      <li><a href="http://kitchenbudapest.hu/en/projects/prezi">ZUI Presentation System</a></li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://www.visionline.hu">Visionline Kft.</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2005-05-01">May 2005</abbr> - <abbr class="dtend" title="2007-05-01">May 2007</abbr></div>
+    <h5 class="title">Software Developer</h5>
+    <p class="description">Hired to develop the new Trefort Chat portal from the ground up. Worked in other projects. Was expected to come up with new feature ideas and to implement them.</p>
+    <ul class="achievements">
+      <li>Built the new Trefort Chat portal from ground up with Ruby on Rails. Integrated with IRC services.</li>
+    </ul>
+    </li>
+  </ul>
+  <h3>Education</h3>
+  <ul class="history vcalendar">
+    <li class="education vevent vcard">
+    <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu/en">BUTE</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2004-09-01">September 2004</abbr> - <abbr class="dtend" title="2009-02-06">February 2009</abbr></div>
+    <h5 class="summary">Computer Science</h5>
+    <ul class="achievements">
+      <li>2004, BME VIK TDK, 3rd place with <a href="http://w2.math.bme.hu/lackac/ipaq/ipaq.pdf">Application Development with Linux on Handheld Devices</a></li>
+      <li>2003, ACM Porgramming Contest, BME 3rd place</li>
+    </ul>
+    </li>
+    <li class="education vevent vcard">
+    <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu/en">BUTE</a></h4>
+    <div class="location">Budapest, Hungary</div>
+    <div class="period"><abbr class="dtstart" title="2002-09-01">September 2002</abbr> - <abbr class="dtend" title="2004-06-01">June 2004</abbr></div>
+    <h5 class="summary">Mathematics</h5>
+    <p class="description">After two years switched to Computer Science</p>
+    </li>
+  </ul>
+  <h3>Key Skills</h3>
+  <small>I use the emphasized skills actively, and I used the others actively sometime in the past.</small>
+  <ul class="skills">
+    <li class="skillarea">Programming:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_%28programming_language%29">Ruby</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_On_Rails">Ruby on Rails</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Sinatra_%28software%29">Sinatra</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Jquery">jQuery</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ajax_%28programming%29">AJAX</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/XHTML">XHTML</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Html5">HTML5</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/SQL">SQL</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Extension_(Mozilla)">Firefox extension development</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Prototype_Javascript_Framework">Prototype</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Script.aculo.us">script.aculo.us</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/MooTools">MooTools</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/PHP">PHP</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>/<a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/S60_platform">Symbian S60</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Java_%28programming_language%29">Java</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Databases:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Couchdb">CouchDB</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MySQL">MySQL</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Sqlite">SQLite</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Operating Systems:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/GNU/Linux">GNU/Linux</a> (<a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ubuntu_%28operating_system%29">Ubuntu</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Debian">Debian</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Gentoo_Linux">Gentoo</a>)</li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MAC_OS_X">Mac OS X</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Server Applications:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Apache_HTTP_server">Apache HTTP Server</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Nginx">nginx</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Capistrano">Capistrano</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Lighttpd">lighttpd</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/BIND">BIND</a></li>
+    </ul>
+    </li>
+  </ul>
+  <h3>References</h3>
+  <ul class="references">
     <li><a href="http://github.com/lackac">Open Source contributions</a></li>
-    <li><a href="https://www.epointsystem.org/trac/epoint_wallet/wiki/FirePay">FirePay</a> (FireFox extension for the ePoint System micropayment solution)</li>
-    <li><a href="http://iwiw.hu/app/1934653002">Dealmakerz</a> (an OpenSocial app for <a href="http://iwiw.hu/">iWiW</a>)</li>
+    <li>Organizing <a href="http://ruby.meetup.hu/">budapest.rb</a> a Hungarian Ruby Meetup since September 2008</li>
+    <li>2009, <a href="http://zanzaa.at">Zanzaa</a> (Ruby on Rails, Lead developer)</li>
+    <li>2008, <a href="http://futrinka.hu">Futrinka</a> (Ruby on Rails, Lead developer on the Ruby side)</li>
+    <li>2008, <a href="http://www.dooringatlan.hu">DoorIngatlan</a> (Ruby on Rails, second half of the development)</li>
+    <li>2006, <a href="http://trefort.hu">Trefort Chat 2.0</a> (Ruby on Rails)</li>
+    <li>2005, <a href="http://landra.hu">landra.hu</a> (PHP)</li>
+    <li>Hungarian PHP Conference, 5k - freestyle compo
+    <ul>
+      <li>2005, <a href="http://www.phpconf.hu/2005/showtime.php/aichat">AIChat</a>, 1st and audience prizes</li>
+      <li>2004, <a href="http://www.phpconf.hu/2004/showtime.php/sokoban">PHP Sokoban</a>, 1st prize</li>
+      <li>2003, <a href="http://www.phpconf.hu/2003/5kcompo.php/Gorcso/fplot">FPlot</a>, audience prize</li>
+    </ul>
+    </li>
+    <li>2004, involvement in the development of <a href="http://drupal.hu">Drupal</a>, an open source CMS and framework (PHP)</li>
+    <li>2001, <a href="http://weszta-t.hu">weszta-t.hu</a></li>
   </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://virgosystems.hu/">Virgo Systems Kft.</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2008-06-02">June 2008</abbr> - <abbr class="dtend" title="2009-05-29">May 2009</abbr></div>
-  <h5 class="title">Technology Expert</h5>
-  <p class="description">Leading Ruby based project development. Organizing and leading Ruby trainings inside the company.</p>
-  <ul class="achievements">
-    <li><a href="http://zanzaa.at/">Zanzaa</a> (Austrian start page)</li>
-    <li><a href="http://iwiw.hu/app/946304631">Zöldségeim</a> (an OpenSocial app for <a href="http://iwiw.hu/">iWiW</a>)</li>
-    <li><a href="http://futrinka.hu/">Futrinka</a> (social network for sharing memories)</li>
+  <h3>Other</h3>
+  <ul class="misc">
+    <li>hobbies: hiking, scouting, photography, <a href="/projects" title="My freetime projects">hobby projects</a></li>
   </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://woa.hu">Woa! Kft.</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2008-01-06">January 2008</abbr> - <abbr class="dtend" title="2008-05-30">May 2008</abbr></div>
-  <h5 class="title">Developer</h5>
-  <p class="description">Worked on several Ruby on Rails projects in small teams.</p>
-  <ul class="achievements">
-    <li><a href="http://www.dooringatlan.hu/">Door Ingatlan</a></li>
-    <li><a href="http://www.vinobilia.com/">Vinobilia</a></li>
-  </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://kitchenbudapest.hu/en">Kitchen Budapest</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2007-05-20">May 2007</abbr> - <abbr class="dtend" title="2008-01-26">January 2008</abbr></div>
-  <h5 class="title">Researcher</h5>
-  <p class="description">Worked in various projects doing mainly software development and project management.</p>
-  <ul class="achievements">
-    <li><a href="http://kitchenbudapest.hu/en/node/228">CityScout</a></li>
-    <li><a href="http://kitchenbudapest.hu/en/projects/multitouchwall">Multitouch Wall</a></li>
-    <li><a href="http://kitchenbudapest.hu/en/projects/prezi">ZUI Presentation System</a></li>
-  </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://www.visionline.hu">Visionline Kft.</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2005-05-01">May 2005</abbr> - <abbr class="dtend" title="2007-05-01">May 2007</abbr></div>
-  <h5 class="title">Software Developer</h5>
-  <p class="description">Hired to develop the new Trefort Chat portal from the ground up. Worked in other projects. Was expected to come up with new feature ideas and to implement them.</p>
-  <ul class="achievements">
-    <li>Built the new Trefort Chat portal from ground up with Ruby on Rails. Integrated with IRC services.</li>
-  </ul>
-  </li>
-</ul>
-<h3>Education</h3>
-<ul class="history vcalendar">
-  <li class="education vevent vcard">
-  <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu/en">BUTE</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2004-09-01">September 2004</abbr> - <abbr class="dtend" title="2009-02-06">February 2009</abbr></div>
-  <h5 class="summary">Computer Science</h5>
-  <ul class="achievements">
-    <li>2004, BME VIK TDK, 3rd place with <a href="http://w2.math.bme.hu/lackac/ipaq/ipaq.pdf">Application Development with Linux on Handheld Devices</a></li>
-    <li>2003, ACM Porgramming Contest, BME 3rd place</li>
-  </ul>
-  </li>
-  <li class="education vevent vcard">
-  <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu/en">BUTE</a></h4>
-  <div class="location">Budapest, Hungary</div>
-  <div class="period"><abbr class="dtstart" title="2002-09-01">September 2002</abbr> - <abbr class="dtend" title="2004-06-01">June 2004</abbr></div>
-  <h5 class="summary">Mathematics</h5>
-  <p class="description">After two years switched to Computer Science</p>
-  </li>
-</ul>
-<h3>Key Skills</h3>
-<small>I use the emphasized skills actively, and I used the others actively sometime in the past.</small>
-<ul class="skills">
-  <li class="skillarea">Programming:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_%28programming_language%29">Ruby</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_On_Rails">Ruby on Rails</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Sinatra_%28software%29">Sinatra</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Jquery">jQuery</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ajax_%28programming%29">AJAX</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/XHTML">XHTML</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Html5">HTML5</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/SQL">SQL</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Extension_(Mozilla)">Firefox extension development</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Prototype_Javascript_Framework">Prototype</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Script.aculo.us">script.aculo.us</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/MooTools">MooTools</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/PHP">PHP</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>/<a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/S60_platform">Symbian S60</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Java_%28programming_language%29">Java</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Databases:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Couchdb">CouchDB</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MySQL">MySQL</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Sqlite">SQLite</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Operating Systems:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/GNU/Linux">GNU/Linux</a> (<a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ubuntu_%28operating_system%29">Ubuntu</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Debian">Debian</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Gentoo_Linux">Gentoo</a>)</li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MAC_OS_X">Mac OS X</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Server Applications:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Apache_HTTP_server">Apache HTTP Server</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Nginx">nginx</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Capistrano">Capistrano</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Lighttpd">lighttpd</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/BIND">BIND</a></li>
-  </ul>
-  </li>
-</ul>
-<h3>References</h3>
-<ul class="references">
-  <li><a href="http://github.com/lackac">Open Source contributions</a></li>
-  <li>Organizing <a href="http://ruby.meetup.hu/">budapest.rb</a> a Hungarian Ruby Meetup since September 2008</li>
-  <li>2009, <a href="http://zanzaa.at">Zanzaa</a> (Ruby on Rails, Lead developer)</li>
-  <li>2008, <a href="http://futrinka.hu">Futrinka</a> (Ruby on Rails, Lead developer on the Ruby side)</li>
-  <li>2008, <a href="http://www.dooringatlan.hu">DoorIngatlan</a> (Ruby on Rails, second half of the development)</li>
-  <li>2006, <a href="http://trefort.hu">Trefort Chat 2.0</a> (Ruby on Rails)</li>
-  <li>2005, <a href="http://landra.hu">landra.hu</a> (PHP)</li>
-  <li>Hungarian PHP Conference, 5k - freestyle compo
-  <ul>
-    <li>2005, <a href="http://www.phpconf.hu/2005/showtime.php/aichat">AIChat</a>, 1st and audience prizes</li>
-    <li>2004, <a href="http://www.phpconf.hu/2004/showtime.php/sokoban">PHP Sokoban</a>, 1st prize</li>
-    <li>2003, <a href="http://www.phpconf.hu/2003/5kcompo.php/Gorcso/fplot">FPlot</a>, audience prize</li>
-  </ul>
-  </li>
-  <li>2004, involvement in the development of <a href="http://drupal.hu">Drupal</a>, an open source CMS and framework (PHP)</li>
-  <li>2001, <a href="http://weszta-t.hu">weszta-t.hu</a></li>
-</ul>
-<h3>Other</h3>
-<ul class="misc">
-  <li>hobbies: hiking, scouting, photography, <a href="/projects" title="My freetime projects">hobby projects</a></li>
-</ul>
 </div>
+
 <!-- Magyar cv -->
-<p><a class="resume-lang" href="#en" onclick="return false;" id="resume_en_link">English</a></p>
 <div id="resume_hu" class="hresume">
-<div class="contact vcard">
-<h2 class="fn n name"><a class="url" name="hu" href="http://lackac.hu/resume#hu" rel="me">     <span class="family-name">Bácsi</span> <span class="given-name">László</span>   </a></h2>
-<address class="adr"><span class="locality">Budapest</span>, <span class="country-name">Magyarország</span></address>
-<div class="phone"><span class="tel"><span class="value">+36 (30) 678-3791</span><span class="type" style="display: none;">mobil</span></span></div>
-<div class="online_info">Email: <a class="email" href="mailto:laszlo@bacsi.name">laszlo@bacsi.name</a>     <br />
-Web: <a class="url" href="http://lackac.hu">http://lackac.hu</a>, <a class="url" href="http://icanscale.com/">http://icanscale.com</a>, <a href="http://www.linkedin.com/profile?viewProfile=&key=28338595&locale=en_US&trk=tab_pro">LinkedIn</a>
-</div>
-</div>
-<hr />
-<h3>Profil</h3>
-<p class="summary">2001 óta foglalkozom webes fejlesztésekkel. Érdekelnek az új technológiák, és ezeket agilis fejlesztési modellben használható és innovatív webalkalmazások készítésére használom.</p>
-<h3>Munka tapasztalat</h3>
-<ul class="history vcalendar">
-  <li class="experience vevent vcard">
-  <h4 class="org summary">Szabadúszó</h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2009-06-01">2009. június</abbr> - <abbr class="dtend">Jelen</abbr></div>
-  <p class="description">A világ különbőző tájairól megkereső ügyfelek projektjein dolgozom Rubyval és Javascripttel.</p>
-  <ul class="achievements">
+  <a class="resume-lang" href="#en" id="resume_en_link">English</a>
+  <div class="contact vcard">
+    <h2 class="fn n name">
+      <a class="url" name="hu" href="http://lackac.hu/resume#hu" rel="me"><span class="family-name">Bácsi</span> <span class="given-name">László</span></a>
+    </h2>
+    <address class="adr"><span class="locality">Budapest</span>, <span class="country-name">Magyarország</span></address>
+    <div class="phone"><span class="tel"><span class="value">+36 (30) 678-3791</span><span class="type" style="display: none;">mobil</span></span></div>
+    <div class="online_info">
+      Email: <a class="email" href="mailto:laszlo@bacsi.name">laszlo@bacsi.name</a><br/>
+      Web: <a class="url" href="http://lackac.hu">http://lackac.hu</a>, <a class="url" href="http://icanscale.com/">http://icanscale.com</a>, <a href="http://www.linkedin.com/profile?viewProfile=&key=28338595&locale=en_US&trk=tab_pro">LinkedIn</a>
+    </div>
+  </div>
+  <hr />
+  <h3>Profil</h3>
+  <p class="summary">2001 óta foglalkozom webes fejlesztésekkel. Érdekelnek az új technológiák, és ezeket agilis fejlesztési modellben használható és innovatív webalkalmazások készítésére használom.</p>
+  <h3>Munka tapasztalat</h3>
+  <ul class="history vcalendar">
+    <li class="experience vevent vcard">
+    <h4 class="org summary">Szabadúszó</h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2009-06-01">2009. június</abbr> - <abbr class="dtend">Jelen</abbr></div>
+    <p class="description">A világ különbőző tájairól megkereső ügyfelek projektjein dolgozom Rubyval és Javascripttel.</p>
+    <ul class="achievements">
+      <li><a href="http://github.com/lackac">Open Source tevékenységek</a></li>
+      <li><a href="https://www.epointsystem.org/trac/epoint_wallet/wiki/FirePay">FirePay</a> (FireFox kiterjesztés az ePoint System micropayment megoldásához)</li>
+      <li><a href="http://iwiw.hu/app/1934653002">Dealmakerz</a> (egy OpenSocial alkalmazás <a href="http://iwiw.hu/">iWiW</a>-re)</li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://virgosystems.hu/">Virgo Systems Kft.</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2008-06-02">2008. június</abbr> - <abbr class="dtend" title="2009-05-29">2009. május</abbr></div>
+    <h5 class="title">Technológiai vezető</h5>
+    <p class="description">Ruby alapú projektek vezetése. Ruby képzések szervezése és vezetése vállalaton belüli képzések.</p>
+    <ul class="achievements">
+      <li><a href="http://zanzaa.at/">Zanzaa</a> (osztrák startlap)</li>
+      <li><a href="http://iwiw.hu/app/946304631">Zöldségeim</a> (egy OpenSocial alkalmazás <a href="http://iwiw.hu/">iWiW</a>-re)</li>
+      <li><a href="http://futrinka.hu/">Futrinka</a> (social network emlékek megosztására)</li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://woa.hu">Woa! Kft.</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2008-01-06">2008. január</abbr> - <abbr class="dtend" title="2008-05-30">2008. május</abbr></div>
+    <h5 class="title">Szoftverfejlesztő</h5>
+    <p class="description">Több projekten dolgoztam kis csapatokban, amelyekhez főként a Ruby on Rails keretrendszert használtuk.</p>
+    <ul class="achievements">
+      <li><a href="http://www.dooringatlan.hu/">Door Ingatlan</a></li>
+      <li><a href="http://www.vinobilia.com/">Vinobilia</a></li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://kitchenbudapest.hu">Kitchen Budapest</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2007-05-20">2007. május</abbr> - <abbr class="dtend" title="2008-01-26">2008. január</abbr></div>
+    <h5 class="title">Kutató</h5>
+    <p class="description">Több projektben vettem részt főként szoftver fejlesztési és projekt menedzselési feladatokat végezve.</p>
+    <ul class="achievements">
+      <li><a href="http://kitchenbudapest.hu/hu/projects/cityscout">CityScout</a></li>
+      <li><a href="http://kitchenbudapest.hu/hu/projects/multitouch">Közösségi érintőképernyő (multi-touch)</a></li>
+      <li><a href="http://kitchenbudapest.hu/hu/projects/zui">ZUI prezentációs rendszer</a></li>
+    </ul>
+    </li>
+    <li class="experience vevent vcard">
+    <h4 class="org summary"><a rel="employer" href="http://www.visionline.hu">Visionline Kft.</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2005-05-01">2005. május</abbr> - <abbr class="dtend" title="2007-05-01">2005. május</abbr></div>
+    <h5 class="title">Szoftverfejlesztő</h5>
+    <p class="description">Az új Tefort Chat portál kifejlesztése volt az eredeti feladatom. Más projektekben is dolgoztam. A munkám során új ötleteket is kellett találjak különböző funkciókra, majd ezeket meg is kellett valósítani.</p>
+    <ul class="achievements">
+      <li>Az új Trefort Chat portál kifejlesztése Ruby on Rails alapokon. Integrálás IRC szolgáltatásokkal.</li>
+    </ul>
+    </li>
+  </ul>
+  <h3>Tanulmányok</h3>
+  <ul class="history vcalendar">
+    <li class="education vevent vcard">
+    <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu">BME</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2004-09-01">2004. szeptember</abbr> - <abbr class="dtend" title="2009-02-06">2009. február</abbr></div>
+    <h5 class="summary">Műszaki informatikus szak</h5>
+    <ul class="achievements">
+      <li>2004, BME VIK TDK, <a href="http://w2.math.bme.hu/lackac/ipaq/ipaq.pdf">Alkalmazásfejlesztés kéziszámítógépre Linux környezetben</a></li>
+      <li>2003, ACM programozó verseny, BME 3. hely</li>
+    </ul>
+    </li>
+    <li class="education vevent vcard">
+    <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu">BME</a></h4>
+    <div class="location">Budapest</div>
+    <div class="period"><abbr class="dtstart" title="2002-09-01">2002. szeptember</abbr> - <abbr class="dtend" title="2004-06-01">2004. június</abbr></div>
+    <h5 class="summary">Matematikus szak</h5>
+    <p class="description">Két év után átjelentkeztem a műszaki informatikus szakra</p>
+    </li>
+  </ul>
+  <h3>Képességek</h3>
+  <small>A kiemelt képességeket jelenleg is aktívan használom, a többit a múltban valamikor használtam aktívan.</small>
+  <ul class="skills">
+    <li class="skillarea">Programozás:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_%28programming_language%29">Ruby</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_On_Rails">Ruby on Rails</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Sinatra_%28software%29">Sinatra</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Jquery">jQuery</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ajax_%28programming%29">AJAX</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/XHTML">XHTML</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Html5">HTML5</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/SQL">SQL</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Extension_(Mozilla)">Firefox extension development</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Prototype_Javascript_Framework">Prototype</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Script.aculo.us">script.aculo.us</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/MooTools">MooTools</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/PHP">PHP</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>/<a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/S60_platform">Symbian S60</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Java_%28programming_language%29">Java</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Adatbázisok:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Couchdb">CouchDB</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MySQL">MySQL</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Sqlite">SQLite</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Operációs rendszerek:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/GNU/Linux">GNU/Linux</a> (<a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ubuntu_%28operating_system%29">Ubuntu</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Debian">Debian</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Gentoo_Linux">Gentoo</a>)</li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MAC_OS_X">Mac OS X</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a></li>
+    </ul>
+    </li>
+    <li class="skillarea">Szerver alkalmazások:
+    <ul class="skillset">
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Apache_HTTP_server">Apache HTTP Server</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Nginx">nginx</a></li>
+      <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Capistrano">Capistrano</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Lighttpd">lighttpd</a></li>
+      <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/BIND">BIND</a></li>
+    </ul>
+    </li>
+  </ul>
+  <h3>Referenciák</h3>
+  <ul class="references">
     <li><a href="http://github.com/lackac">Open Source tevékenységek</a></li>
-    <li><a href="https://www.epointsystem.org/trac/epoint_wallet/wiki/FirePay">FirePay</a> (FireFox kiterjesztés az ePoint System micropayment megoldásához)</li>
-    <li><a href="http://iwiw.hu/app/1934653002">Dealmakerz</a> (egy OpenSocial alkalmazás <a href="http://iwiw.hu/">iWiW</a>-re)</li>
+    <li>A <a href="http://ruby.meetup.hu/">budapest.rb</a>, egy rendszeres magyar Ruby találkozó főszervezője 2008. szeptember óta.</li>
+    <li>2009, <a href="http://zanzaa.at">Zanzaa</a> (Ruby on Rails, Vezető fejlesztő)</li>
+    <li>2008, <a href="http://futrinka.hu">Futrinka</a> (Ruby on Rails, Vezető fejlesztő a Ruby oldalról)</li>
+    <li>2008, <a href="http://www.dooringatlan.hu">DoorIngatlan</a> (Ruby on Rails, fejlesztés második fele)</li>
+    <li>2006, <a href="http://trefort.hu">Trefort Chat 2.0</a> (Ruby on Rails)</li>
+    <li>2005, <a href="http://landra.hu">landra.hu</a> (PHP)</li>
+    <li>Magyar PHP Konferencia, 5k - freestyle compo
+    <ul>
+      <li>2005, <a href="http://www.phpconf.hu/2005/showtime.php/aichat">AIChat</a>, első- és közönségdíj</li>
+      <li>2004, <a href="http://www.phpconf.hu/2004/showtime.php/sokoban">PHP Sokoban</a>, első díj</li>
+      <li>2003, <a href="http://www.phpconf.hu/2003/5kcompo.php/Gorcso/fplot">FPlot</a>, közönség díj</li>
+    </ul>
+    </li>
+    <li>2004, részvétel a <a href="http://drupal.hu">Drupal</a> nyílt forrású CMS rendszer fejlesztésében (PHP)</li>
+    <li>2001, <a href="http://weszta-t.hu">weszta-t.hu</a></li>
   </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://virgosystems.hu/">Virgo Systems Kft.</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2008-06-02">2008. június</abbr> - <abbr class="dtend" title="2009-05-29">2009. május</abbr></div>
-  <h5 class="title">Technológiai vezető</h5>
-  <p class="description">Ruby alapú projektek vezetése. Ruby képzések szervezése és vezetése vállalaton belüli képzések.</p>
-  <ul class="achievements">
-    <li><a href="http://zanzaa.at/">Zanzaa</a> (osztrák startlap)</li>
-    <li><a href="http://iwiw.hu/app/946304631">Zöldségeim</a> (egy OpenSocial alkalmazás <a href="http://iwiw.hu/">iWiW</a>-re)</li>
-    <li><a href="http://futrinka.hu/">Futrinka</a> (social network emlékek megosztására)</li>
+  <h3>Egyéb</h3>
+  <ul class="misc">
+    <li>hobbijaim: túrázás, cserkészet, fotózás, <a href="/projects" title="szabadidős projektek">hobbi projektek</a></li>
   </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://woa.hu">Woa! Kft.</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2008-01-06">2008. január</abbr> - <abbr class="dtend" title="2008-05-30">2008. május</abbr></div>
-  <h5 class="title">Szoftverfejlesztő</h5>
-  <p class="description">Több projekten dolgoztam kis csapatokban, amelyekhez főként a Ruby on Rails keretrendszert használtuk.</p>
-  <ul class="achievements">
-    <li><a href="http://www.dooringatlan.hu/">Door Ingatlan</a></li>
-    <li><a href="http://www.vinobilia.com/">Vinobilia</a></li>
-  </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://kitchenbudapest.hu">Kitchen Budapest</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2007-05-20">2007. május</abbr> - <abbr class="dtend" title="2008-01-26">2008. január</abbr></div>
-  <h5 class="title">Kutató</h5>
-  <p class="description">Több projektben vettem részt főként szoftver fejlesztési és projekt menedzselési feladatokat végezve.</p>
-  <ul class="achievements">
-    <li><a href="http://kitchenbudapest.hu/hu/projects/cityscout">CityScout</a></li>
-    <li><a href="http://kitchenbudapest.hu/hu/projects/multitouch">Közösségi érintőképernyő (multi-touch)</a></li>
-    <li><a href="http://kitchenbudapest.hu/hu/projects/zui">ZUI prezentációs rendszer</a></li>
-  </ul>
-  </li>
-  <li class="experience vevent vcard">
-  <h4 class="org summary"><a rel="employer" href="http://www.visionline.hu">Visionline Kft.</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2005-05-01">2005. május</abbr> - <abbr class="dtend" title="2007-05-01">2005. május</abbr></div>
-  <h5 class="title">Szoftverfejlesztő</h5>
-  <p class="description">Az új Tefort Chat portál kifejlesztése volt az eredeti feladatom. Más projektekben is dolgoztam. A munkám során új ötleteket is kellett találjak különböző funkciókra, majd ezeket meg is kellett valósítani.</p>
-  <ul class="achievements">
-    <li>Az új Trefort Chat portál kifejlesztése Ruby on Rails alapokon. Integrálás IRC szolgáltatásokkal.</li>
-  </ul>
-  </li>
-</ul>
-<h3>Tanulmányok</h3>
-<ul class="history vcalendar">
-  <li class="education vevent vcard">
-  <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu">BME</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2004-09-01">2004. szeptember</abbr> - <abbr class="dtend" title="2009-02-06">2009. február</abbr></div>
-  <h5 class="summary">Műszaki informatikus szak</h5>
-  <ul class="achievements">
-    <li>2004, BME VIK TDK, <a href="http://w2.math.bme.hu/lackac/ipaq/ipaq.pdf">Alkalmazásfejlesztés kéziszámítógépre Linux környezetben</a></li>
-    <li>2003, ACM programozó verseny, BME 3. hely</li>
-  </ul>
-  </li>
-  <li class="education vevent vcard">
-  <h4 class="org summary"><a rel="employer former" href="http://www.bme.hu">BME</a></h4>
-  <div class="location">Budapest</div>
-  <div class="period"><abbr class="dtstart" title="2002-09-01">2002. szeptember</abbr> - <abbr class="dtend" title="2004-06-01">2004. június</abbr></div>
-  <h5 class="summary">Matematikus szak</h5>
-  <p class="description">Két év után átjelentkeztem a műszaki informatikus szakra</p>
-  </li>
-</ul>
-<h3>Képességek</h3>
-<small>A kiemelt képességeket jelenleg is aktívan használom, a többit a múltban valamikor használtam aktívan.</small>
-<ul class="skills">
-  <li class="skillarea">Programozás:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_%28programming_language%29">Ruby</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ruby_On_Rails">Ruby on Rails</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Sinatra_%28software%29">Sinatra</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Jquery">jQuery</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ajax_%28programming%29">AJAX</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/XHTML">XHTML</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Html5">HTML5</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/SQL">SQL</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Extension_(Mozilla)">Firefox extension development</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Prototype_Javascript_Framework">Prototype</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Script.aculo.us">script.aculo.us</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/MooTools">MooTools</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/PHP">PHP</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>/<a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/S60_platform">Symbian S60</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Java_%28programming_language%29">Java</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Adatbázisok:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Couchdb">CouchDB</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MySQL">MySQL</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Sqlite">SQLite</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Operációs rendszerek:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/GNU/Linux">GNU/Linux</a> (<a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Ubuntu_%28operating_system%29">Ubuntu</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Debian">Debian</a>, <a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Gentoo_Linux">Gentoo</a>)</li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/MAC_OS_X">Mac OS X</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a></li>
-  </ul>
-  </li>
-  <li class="skillarea">Szerver alkalmazások:
-  <ul class="skillset">
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Apache_HTTP_server">Apache HTTP Server</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Nginx">nginx</a></li>
-    <li><a class="skill active" rel="tag" href="http://en.wikipedia.org/wiki/Capistrano">Capistrano</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/Lighttpd">lighttpd</a></li>
-    <li><a class="skill" rel="tag" href="http://en.wikipedia.org/wiki/BIND">BIND</a></li>
-  </ul>
-  </li>
-</ul>
-<h3>Referenciák</h3>
-<ul class="references">
-  <li><a href="http://github.com/lackac">Open Source tevékenységek</a></li>
-  <li>A <a href="http://ruby.meetup.hu/">budapest.rb</a>, egy rendszeres magyar Ruby találkozó főszervezője 2008. szeptember óta.</li>
-  <li>2009, <a href="http://zanzaa.at">Zanzaa</a> (Ruby on Rails, Vezető fejlesztő)</li>
-  <li>2008, <a href="http://futrinka.hu">Futrinka</a> (Ruby on Rails, Vezető fejlesztő a Ruby oldalról)</li>
-  <li>2008, <a href="http://www.dooringatlan.hu">DoorIngatlan</a> (Ruby on Rails, fejlesztés második fele)</li>
-  <li>2006, <a href="http://trefort.hu">Trefort Chat 2.0</a> (Ruby on Rails)</li>
-  <li>2005, <a href="http://landra.hu">landra.hu</a> (PHP)</li>
-  <li>Magyar PHP Konferencia, 5k - freestyle compo
-  <ul>
-    <li>2005, <a href="http://www.phpconf.hu/2005/showtime.php/aichat">AIChat</a>, első- és közönségdíj</li>
-    <li>2004, <a href="http://www.phpconf.hu/2004/showtime.php/sokoban">PHP Sokoban</a>, első díj</li>
-    <li>2003, <a href="http://www.phpconf.hu/2003/5kcompo.php/Gorcso/fplot">FPlot</a>, közönség díj</li>
-  </ul>
-  </li>
-  <li>2004, részvétel a <a href="http://drupal.hu">Drupal</a> nyílt forrású CMS rendszer fejlesztésében (PHP)</li>
-  <li>2001, <a href="http://weszta-t.hu">weszta-t.hu</a></li>
-</ul>
-<h3>Egyéb</h3>
-<ul class="misc">
-  <li>hobbijaim: túrázás, cserkészet, fotózás, <a href="/projects" title="szabadidős projektek">hobbi projektek</a></li>
-</ul>
 </div>
 <!-- end of CVs -->
