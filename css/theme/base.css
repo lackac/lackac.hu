@@ -336,23 +336,26 @@ address {
 	padding: 2px;
 }
 /* Hide the search label as it's dealt with in javascript */
-#sform {
+#cse-search-box {
 	margin-left: 10px;
 	position: relative;
 }
-#sform label { display: none; }
+#cse-search-box label { display: none; }
 #q_proxy_safari {
-	width: 70%;
+	width: 50%;
 }
 #q_proxy {
 	font-size: 100%;
-	width: 70%;
+	width: 50%;
 	color: #999;
 	border: 1px solid #ddd;
 	border-top-color: #aaa;
 	border-left-color: #aaa;
 	padding: 3px 5px 3px 20px;
 	background: url(/images/theme/bg_magnify.gif) no-repeat 4px 50%;
+}
+#sa {
+  width: 20%;
 }
 #q_proxy.active {
 	color: #000;

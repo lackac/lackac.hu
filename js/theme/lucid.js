@@ -55,7 +55,7 @@ function iq_format_search_field() {
 function iq_copy_search_value() {
   var val = $(this).val();
   // proxy the values but intercept the status messasge
-  var text_field = document.getElementById('q');
+  var text_field = $('#q');
   text_field.val(val == SEARCH_PROMPT ? '' : val);
 }
 
