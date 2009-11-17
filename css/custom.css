@@ -56,3 +56,15 @@ ul.skillset li:after {
 ul.skillset .active {
   font-weight: bold;
 }
+
+.highlight {
+  margin: 1em;
+  border: 1px solid #ccc;
+  background-color: #ffe;
+}
+
+.highlight pre {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
