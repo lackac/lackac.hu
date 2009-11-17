@@ -7,8 +7,6 @@ title:  Blog
     <div class="post-title"><h1><a href="{{ post.url }}">{{ post.title }}</a></h1></div>
     <p class="auth">
       <span class="date" title="{{ post.created_at | date_to_xmlschema }}" >{{ post.created_at | date: "%Y-%m-%d %H:%M" }}</span>
-      {% unless post.no_comment %}
-      | <a href="http://ruby.meetup.hu{{post.url}}#disqus_thread" class="comments">kommentek</a>{% endunless %}
     </p>
     <div class="post-body">
       {{ post.content }}
