@@ -36,7 +36,16 @@
   </div>
 
   <div id="search">
-    <form action="/search.html" id="sform" method="get"><label for="q">Search:</label><input type="text" id="q" name="q" value="" size="15" /></form>
+    <form action="/search.html" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="016830784505072339417:zpwfnja3a-q" />
+        <input type="hidden" name="cof" value="FORID:11" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <label for="q">Keresés:</label>
+        <input type="text" id="q" name="q" size="15" />
+        <input type="submit" id="sa" name="sa" value="Go" />
+      </div>
+    </form>
   </div>
 
   <ul id="preferences">
