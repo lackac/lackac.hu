@@ -1,0 +1,41 @@
+--- 
+created_at: 2010-01-01 15:22:38.840067 +01:00
+layout: post
+title: 01-01-01
+---
+Beadom a derekam, és én is írok valami újéveset. Egyrészt mert megtetszett [Gaba évvégi összegzős bejegyzése][1], másrészt mert éjfél előtt volt egy nagyon jó beszélgetésünk, ahol kicsit összegeztük, hogy mi volt és mi lesz. Csak három egyszerű kérdés.
+
+[1]: http://lenardgabor.hu/2009-es-oromeim
+
+## Mi volt a legjobb 2009-ben?
+
+Erre nagyon könnyű válaszolnom, mert az előző év egyik eseménye nem csak annak az évnek, hanem egész életemnek meghatározó pontja volt. Nem is nehéz kitalálni: 2009-ből feleségemért vagyok leginkább hálás. Csodálatos volt az esküvőig vezető út, és ahogy Isten megsegített minden apró dologban. Az esküvő napja pedig szinte tökéletes. Szívesen visszamennék az időben, és még jónéhányszor újraélném **azt** a napot.
+
+Holnap lesz 5 hónapja, hogy összeházasodtunk, és remélem még legalább százhússzor ennyi van hátra. Csodálatos feleségem van, akivel minden nap újabb öröm, és akiért nagyon hálás vagyok Istennek.
+
+## Mit szeretnék másképp csinálni 2010-ben?
+
+Azt mondják azért vannak a hibák, hogy tanuljunk belőlük. 2009 ebben az értelemben sok tanulnivalót adott. [Eljöttem a Virgóból][2], és azóta szabadúszóként dolgozom webes projekteken több-kevesebb sikerrel. Két nagyobb projekt volt eddig, egyik nagyon jól sikerült, másik kevésbbé. Inkább nem részletezem őket, elég annyi, hogy az utóbbi esetében [lehettem volna bölcsebb][3] bevállalás előtt.
+
+[2]: http://lackac.hu/2009/05/19/bye-bye-virgo.html
+[3]: http://twitter.com/LacKac/status/4885166071
+
+2010-ben szeretnék céltudatosabban haladni és meggondoltabban dönteni üzleti és szakmai dolgokban. Elkezdtem olvasni a *[Passionate Programmer][4]* c. könyvet. Ez a *My Job Went to India* c. könyv újabb kiadása. Nagyon inspiráló dolgok vannak benne, aminek köszönhetően sok dolgot másképp látok már, és néhány korábbi jónak gondolt döntés átértékelődött. A cél tehát az, hogy ne az ár sodródása határozza meg, hogy épp merre halad a karrierem, hanem én tudjam tudatosabban irányítani. Pár hete elkezdtem egy új projektet, és ezen már igyekszem ezzel az új szemlélettel dolgozni. Eddig jól megy. :)
+
+[4]: http://pragprog.com/titles/cfcar2/the-passionate-programmer
+
+Ehhez valamennyire kapcsolódik egy másik dolog is, ami mostanában motoszkál bennem. Nagyon szeretek új technológiákkal játszani, érdekes új dolgokkal kísérletezni. Emellett azonban egyre jobban úgy érzem, hogy sok olyan témakörre, amit régen tanultam, és szerettem, már nem nagyon emlékszem. Szeretném ezeket is újra elővenni, kicsit foglalkozni algoritmuselmélettel, mesterséges intelligenciával. *Just for fun.* Ha másra nem is, arra biztosan jó lesz, hogy megmozgassa és frissen tartsa az agytekervényeimet.
+
+## Hogyan fogom 2010-ben szolgálni az Urat?
+
+2009 [Bibliaolvasó](http://bibliaolvaso.hu) hobbiprojektje nagyon szívemhez nőtt. Sajnos ennek ellenére nem jutott sok időm arra, hogy komolyabban foglalkozzak vele. Ezen szeretnék változtatni, és néhány régebb óta tervezett fejlesztést elvégezni. Keresztény emberként nagyon fontosnak tartom a mindennapi bibliaolvasást, ezért az oldal épp ezt szeretné megkönnyíteni az rss feedekkel és emailes feliratkozással. Az újévi tervek között szerepel egy átgondoltabb újraírás, designolás és néhány kényelmi funkció mellett egy-két közösségibb feature is.
+
+Eddig nem nagyon foglalkoztam az oldal népszerűségével. Hobbiprojektként elsősorban saját magamnak készítettem, és persze örültem, ha valahonnan azt hallottam, hogy mások is szeretik és használják. A 2010-es tervek között azonban szerepel az is, hogy többen tudjanak az oldalról és használják. Ennek kapcsán [Nagy Bencének](http://tipogral.hu/) köszönhetően az [Evangélikus Élet][4] újévi első számában megjelenik egy cikkem a Bibliaolvasóról.
+
+Év vége előtt [három új olvasóterv][6] került a Bibliaolvasóba. Most még van lehetőség arra, hogy az év első napján el lehessen kezdeni valamelyiket. Én azt tervezem, hogy ebben az évben a [kronológikus olvasóterv][7] alapján olvasom végig a bibliát az új protestáns fordítást használva.
+
+[5]: http://www.lutheran.hu/z/ujsagok/evelet/
+[6]: http://bibliaolvaso.hu/pages/ujdonsagok
+[7]: http://ujforditas.bibliaolvaso.hu/kronologikus
+
+Végül szeretnék mindenkinek *Istentől megáldott boldog új évet kívánni*!
