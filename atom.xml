@@ -21,7 +21,7 @@ email:     lackac@lackac.hu
   {% for post in site.posts limit:15 %}
   <entry>
     <title>{{ post.title }}</title>
-    <link href="{{ post.url }}"/>
+    <link href="http://{{ page.site }}/{{ post.url }}"/>
     <id>tag:{{ page.site }},{{ post.created_at | date_to_xmlschema }}</id>
     <updated>{% if post.updated_at %}{{ post.updated_at | date_to_xmlschema }}{% else %}{{ post.created_at | date_to_xmlschema }}{% endif %}</updated>
     <author>
