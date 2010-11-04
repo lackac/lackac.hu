@@ -5,6 +5,14 @@
   background-image: none;
 }
 
+#topsubcol {
+  float: right;
+  width: 29%;
+  line-height: 1.4em;
+  background-color: white;
+  padding-bottom: 1em;
+}
+
 .alignleft {
   float: left;
   margin: 0 5px 5px 0;
