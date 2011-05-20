@@ -3,14 +3,14 @@ created_at: 2011-05-20 16:15:34.519704 +01:00
 layout: post
 title: "Quick Update"
 ---
-Nem nagyon törtnént itt mostanában frissítés, és nem is nagyon fog. Nem
+Nem nagyon történt itt mostanában frissítés, és nem is nagyon fog. Nem
 mintha nem lenne mit mondani, csupán időt nem találok rá, és ha egyszer
 sikerülne is időt találni, akkor is valószínű inkább angolul állnék neki
 újra.
 
-Ez most egy gyors update, amiben szeretném tisztázni, hogy **jeleneg nem
+Ez most egy gyors update, amiben szeretném tisztázni, hogy **jelenleg nem
 vagyok elérhető semmiféle projektre**. Itt van, kimondtam, ezek után már
-lelkiismeret furdalás nélkül tudok egy szóban minden megkeresést
+lelkiismeret-furdalás nélkül tudok egy szóban minden megkeresést
 visszautasítani.
 
 Tavaly május óta a [Secret Sauce Partners][1] cég kicsi, lelkes és profi
@@ -18,7 +18,7 @@ fejlesztőcsapatát erősítem, és nagyon élvezem. Hatalmas élmény olyan
 munkatársakkal együtt dolgozni, akik nagyon értenek ahhoz, amit
 csinálnak, és ha valahol még fejlődniük kell, akkor azt lelkesen teszik.
 Az eddig eltelt egy év alatt magam is sokat tanultam tőlük. Ha számba
-kellene vennem, akkor talán többet, mint előtte egymagamban, vagy
+kellene vennem, akkor talán többet, mint előtte egymagamban vagy
 korábbi munkahelyeimen. Rengeteg izgalmas problémával találjuk szembe
 magunkat, és sok új dolgot tudunk kipróbálni (nem csak mint lehetőség,
 hanem inkább mint követelmény). Nem sokára elérhető lesz legújabb
@@ -31,8 +31,8 @@ Pár kulcsszó azzal kapcsolatban, hogy mikkel dolgozunk: [Ruby][3],
 [Sinatra][4], [Chef][5], [Linode][5b], [Node.js][6], [CoffeeScript][7],
 [HTML5][8], [CouchDB][9], [Kanso][10], [Titanium][11], [BDD w/ vows,
 sinon.js, should.js][12], ... Minek is erőlködöm, nem lehet felsorolni
-mindet.  Ha érdekel, keress meg bővebben, keress meg [valamelyik][13],
-[meetupon][14], és szívesen beszélek róla.
+mindet.  Ha bővebben érdekel, keress meg [valamelyik][13] [meetupon][14],
+és szívesen beszélek róla.
 
 [3]: http://ruby-lang.org/
 [4]: http://www.sinatrarb.com/
