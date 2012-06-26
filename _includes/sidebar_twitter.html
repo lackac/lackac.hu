@@ -1,9 +1,66 @@
 <h3 class='sidebar-title'>Twitter updates</h3>
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
 <div class='static-body'>
-  <div id="twitter_div">
-    <p>by LacKac</p>
-    <ul id="twitter_update_list"><li></li></ul>
+  <div id="twitter-lackac">
   </div>
-  <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-  <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/LacKac.json?callback=twitterCallback2&amp;count=5"></script>
+  <script>
+  new TWTR.Widget({
+    id: 'twitter-lackac',
+    version: 2,
+    type: 'profile',
+    rpp: 5,
+    interval: 30000,
+    width: 'auto',
+    height: 300,
+    theme: {
+      shell: {
+        background: '#cccccc',
+        color: '#000000'
+      },
+      tweets: {
+        background: '#ffffff',
+        color: '#000000',
+        links: '#8888ff'
+      }
+    },
+    features: {
+      scrollbar: false,
+      loop: false,
+      live: false,
+      behavior: 'all'
+    }
+  }).render().setUser('LacKac').start();
+  </script>
+</div>
+<div class='static-body'>
+  <div id="twitter-icanscale">
+  </div>
+  <script>
+  new TWTR.Widget({
+    id: 'twitter-icanscale',
+    version: 2,
+    type: 'profile',
+    rpp: 5,
+    interval: 30000,
+    width: 'auto',
+    height: 300,
+    theme: {
+      shell: {
+        background: '#cccccc',
+        color: '#000000'
+      },
+      tweets: {
+        background: '#ffffff',
+        color: '#000000',
+        links: '#8888ff'
+      }
+    },
+    features: {
+      scrollbar: false,
+      loop: false,
+      live: false,
+      behavior: 'all'
+    }
+  }).render().setUser('icanscale').start();
+  </script>
 </div>
