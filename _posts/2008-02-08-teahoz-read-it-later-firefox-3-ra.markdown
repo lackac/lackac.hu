@@ -30,7 +30,7 @@ A <tt>Command</tt> (Windowson <tt>Control</tt>) billentyű nyomva tartásával a
 
 ## Fejlesztés
 
-A fejlesztés egy egyéjszakás projekt volt. Ennyi kellett ahhoz, hogy *nulla* Firefox Extension fejlesztési tapasztalattal (de erős Javascript, XML ismeretekkel) indulva ez elkészüljön. A következő oldalak voltak nagyon hasznosak fejlesztés közben:
+A fejlesztés egy egyéjszakás projekt volt. Ennyi kellett ahhoz, hogy *nulla* Firefox Extension fejlesztési tapasztalattal (de erős JavaScript, XML ismeretekkel) indulva ez elkészüljön. A következő oldalak voltak nagyon hasznosak fejlesztés közben:
 
 * induláshoz [a legrövidebb Firefox Extension fejlesztési tutorial][4],
 * egy nagyon hasznos [kiterjesztés vázat generáló eszköz][5],

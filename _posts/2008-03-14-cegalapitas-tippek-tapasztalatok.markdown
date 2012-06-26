@@ -11,7 +11,7 @@ Egy újabb blog indítása helyett ezért inkább itt fogom megosztani a tapaszt
 
 Kezdjünk bele.
 
-Először is az alapok. Főként *webalkalmazás fejlesztéssel és tanácsadással* foglalkozom, és elkötelezett híve vagyok az [*agile fejlesztésnek*][16]. Főként [*Rubyt*][1], [*Railst*][2] és a feladatnak megfelelő *Javascript* keretrendszert használok. Az utóbbi időben jellemzővé vált, hogy több projekten dolgozom párhuzamosan és ezek több ügyfélt érintenek. Néha pedig jó lenne néhány részfeladatot kiadni külső fejlesztőnek. Főként ezek az okok vezettek oda, hogy mostmár jó lenne mindezt egy cégen keresztül folytatni. Ezen túl pedig van néhány webalkalmazás ötletem, amihez érdemes lenne tőkét gyűjteni, beindítani, és majd meg is gazdagodni belőle :).
+Először is az alapok. Főként *webalkalmazás fejlesztéssel és tanácsadással* foglalkozom, és elkötelezett híve vagyok az [*agile fejlesztésnek*][16]. Főként [*Rubyt*][1], [*Railst*][2] és a feladatnak megfelelő *JavaScript* keretrendszert használok. Az utóbbi időben jellemzővé vált, hogy több projekten dolgozom párhuzamosan és ezek több ügyfélt érintenek. Néha pedig jó lenne néhány részfeladatot kiadni külső fejlesztőnek. Főként ezek az okok vezettek oda, hogy mostmár jó lenne mindezt egy cégen keresztül folytatni. Ezen túl pedig van néhány webalkalmazás ötletem, amihez érdemes lenne tőkét gyűjteni, beindítani, és majd meg is gazdagodni belőle :).
 
 [16]: http://en.wikipedia.org/wiki/Agile_software_development
 [1]: http://www.ruby-lang.org/en/

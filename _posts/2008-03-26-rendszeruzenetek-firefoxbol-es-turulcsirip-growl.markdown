@@ -5,7 +5,7 @@ tags: "firefox extension project callout growl turulcsirip csipp greasemonkey"
 title: "Rendszerüzenetek Firefoxból és Turulcsirip Growl [update 3]"
 typo_id: 32
 ---
-Az elmúlt héten egy olyan Firefox kiterjesztést fejlesztgettem, ami lehetővé teszi, hogy Javascript kódból küldjünk üzeneteket a felhasználónak. Persze nem a mindenki által utált <code>alert('hello world')</code> módon, hanem úgy, hogy az Macen [Growl][1] segítségével, Windowson az ottani jobb alsó sarokban felbújó rendszerüzenetben, Linuxon pedig valami hasonló módon jelenjen meg.
+Az elmúlt héten egy olyan Firefox kiterjesztést fejlesztgettem, ami lehetővé teszi, hogy JavaScript kódból küldjünk üzeneteket a felhasználónak. Persze nem a mindenki által utált <code>alert('hello world')</code> módon, hanem úgy, hogy az Macen [Growl][1] segítségével, Windowson az ottani jobb alsó sarokban felbújó rendszerüzenetben, Linuxon pedig valami hasonló módon jelenjen meg.
 
 Könnyen végig lehet gondolni, hogy ez milyen hasznos lehet, ha valami olyan folyamatosan változó oldalt szeretnénk követni, mint például a [Turulcsirip][2]. Ehhez csak egy [Greasemonkey][3] user szkriptet kellene írni, ami az új csiripeket a kiterjesztés által biztosított API-n keresztül elküldi nekünk ezen a csatornán is.
 
