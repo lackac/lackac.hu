@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: "Posted with Prose"
 created_at: 2012-06-26 09:59:34.519704 +02:00
 ---
